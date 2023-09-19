@@ -31,7 +31,7 @@
 1. Open the app and enter your pick-up and drop-off details.
 2. Choose the items you want to be delivered.
 3. Before confirming the delivery, you'll be presented with an option to watch ads and save on your delivery fee.
-4. Track your delivery in real-time.
+4. Track your delivery in real-time!
 5. Receive your items and enjoy the savings!
 
 ## Contributors
