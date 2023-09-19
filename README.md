@@ -1,11 +1,11 @@
-# ViewMorePayLess
-![ViewMorePayLess Logo](logo_link_here.png)
+# Watch&Ship
+![Watch&Ship Logo](logo_link_here.png)
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](link_to_build_status)
 [![License](https://img.shields.io/badge/license-MIT-blue)](link_to_license)
 [![Version](https://img.shields.io/badge/version-1.0.0-red)](link_to_version)
 
-**ViewMorePayLess** is an innovative, ad-driven delivery system that empowers users to request pickups of any item, from any location, and have it delivered anywhere. The best part? You can save money on your deliveries by simply choosing to watch ads!
+**Watch&Ship** is an innovative, ad-driven delivery system that empowers users to request pickups of any item, from any location, and have it delivered anywhere. The best part? You can save money on your deliveries by simply choosing to watch ads!
 
 ## Table of Contents
 - [Features](#features)
@@ -25,7 +25,7 @@
 ## Installation
 1. Visit our [official website](link_to_website) to download the app.
 2. Follow the installation prompts to get started.
-3. Sign up or log in, and you're ready to use **ViewMorePayLess**!
+3. Sign up or log in, and you're ready to use **Watch&Ship**!
 
 ## Usage
 1. Open the app and enter your pick-up and drop-off details.
@@ -44,7 +44,7 @@
 
 ## Support
 Experiencing issues or have questions? Reach out to our support team through:
-- Email: support@viewmorepayless.com
+- Email: support@watchandship.com
 - Phone: +1-800-123-4567
 - [FAQs](link_to_faqs)
 
