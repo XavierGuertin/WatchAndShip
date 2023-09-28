@@ -17,20 +17,20 @@ import abstract from "./abstract.png"
 
 
 export {
-  logo,
-  menu,
-  close,
-  google,
-  apple,
-  arrowUp,
-  discount,
-  facebook,
-  instagram,
-  linkedin,
-  twitter,
-  searchIcon,
-  saveIcon,
-  shippingIcon,
-  tracking,
-  abstract
+    logo,
+    menu,
+    close,
+    google,
+    apple,
+    arrowUp,
+    discount,
+    facebook,
+    instagram,
+    linkedin,
+    twitter,
+    searchIcon,
+    saveIcon,
+    shippingIcon,
+    tracking,
+    abstract
 };

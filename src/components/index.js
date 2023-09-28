@@ -7,11 +7,11 @@ import Footer from "./Footer";
 import MainSection from "./MainSection.jsx";
 
 export {
-  Navbar,
-  MainSection,
-  Features,
-  Tracking,
-  Numbers,
-  GetAQuote,
-  Footer,
+    Navbar,
+    MainSection,
+    Features,
+    Tracking,
+    Numbers,
+    GetAQuote,
+    Footer,
 };

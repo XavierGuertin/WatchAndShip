@@ -148,16 +148,16 @@
 
 @keyframes scaleLogo {
     0% {
-        transform: scale(1);  /* Start at normal size */
+        transform: scale(1); /* Start at normal size */
     }
     50% {
-        transform: scale(1.2);  /* Grow by 10% at the halfway point */
+        transform: scale(1.2); /* Grow by 10% at the halfway point */
     }
     100% {
-        transform: scale(1);  /* Return to normal size by the end */
+        transform: scale(1); /* Return to normal size by the end */
     }
 }
 
 .logo {
-    animation: scaleLogo 3s infinite;  /* Apply the animation, lasting 2 seconds per cycle, and repeat infinitely */
+    animation: scaleLogo 3s infinite; /* Apply the animation, lasting 2 seconds per cycle, and repeat infinitely */
 }
