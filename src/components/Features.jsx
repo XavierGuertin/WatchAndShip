@@ -1,5 +1,4 @@
 import styles, {layout} from "../style";
-import Button from "./Button";
 import {saveIcon, searchIcon, shippingIcon} from "../assets/index.js";
 
 const Features = () => (
@@ -15,12 +14,9 @@ const Features = () => (
                 <br/><br/>Complete your journey with our integrated payment and feedback system, ensuring every delivery
                 meets your satisfaction.
             </p>
-
-            <Button styles={`mt-10`}/>
         </div>
-        <div className="absolute z-[0] w-[60%] h-[60%] -bottom-[85%] -left-[0%] rounded-full blue__gradient"/>
         <div className={`${layout.sectionImg} flex-col`}>
-            <div className={`flex flex-row p-6 rounded-[20px] mb-6 feature-card`}>
+            <div className={`flex flex-row p-6 rounded-[20px] mb-6 features`}>
                 <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
                     <img src={searchIcon} alt="star" className="w-[50%] h-[50%] object-contain"/>
                 </div>
@@ -33,7 +29,7 @@ const Features = () => (
                     </p>
                 </div>
             </div>
-            <div className={`flex flex-row p-6 rounded-[20px] mb-6 feature-card`}>
+            <div className={`flex flex-row p-6 rounded-[20px] mb-6 features`}>
                 <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
                     <img src={shippingIcon} style={{filter: 'invert(1)'}} alt="star"
                          className="w-[50%] h-[50%] object-contain"/>
@@ -47,7 +43,7 @@ const Features = () => (
                     </p>
                 </div>
             </div>
-            <div className={`flex flex-row p-6 rounded-[20px] mb-6 feature-card`}>
+            <div className={`flex flex-row p-6 rounded-[20px] mb-6 features`}>
                 <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
                     <img src={saveIcon} alt="star" className="w-[50%] h-[50%] object-contain"/>
                 </div>
@@ -61,6 +57,7 @@ const Features = () => (
                 </div>
             </div>
         </div>
+        <div className="absolute z-[0] opacity-45 w-[60%] h-[60%] -bottom-[140%] -left-[10%] rounded-full blue__gradient"/>
     </section>
 );
 

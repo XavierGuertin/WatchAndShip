@@ -48,27 +48,10 @@
 
 .bg-black-gradient {
     background: linear-gradient(
-            144.39deg,
-            #ffffff -278.56%,
-            #6d6d6d -78.47%,
-            #11101d 91.61%
-    );
-}
-
-.bg-black-gradient-2 {
-    background: linear-gradient(
             -168.39deg,
             #ffffff -278.56%,
             #6d6d6d -78.47%,
             #11101d 91.61%
-    );
-}
-
-.bg-gray-gradient {
-    background: linear-gradient(
-            153.47deg,
-            rgba(255, 255, 255, 0) -341.94%,
-            #14101d 95.11%
     );
 }
 
@@ -80,54 +63,13 @@
     box-shadow: 0 20px 100px -10px rgba(66, 71, 91, 0.1);
 }
 
-.sidebar {
-    -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-@-webkit-keyframes slide-top {
-    0% {
-        -ms-transform: translateY(100px);
-        transform: translateY(100px);
-    }
-    100% {
-        -ms-transform: translateY(0);
-        transform: translateY(0);
-    }
-}
-
-@keyframes slide-top {
-    0% {
-        -ms-transform: translateY(100px);
-        transform: translateY(100px);
-    }
-    100% {
-        -ms-transform: translateY(0);
-        transform: translateY(0);
-    }
-}
-
-.feature-card {
+.features {
     transition: all 1s ease;
 }
 
-.feature-card:hover {
+.features:hover {
     background: var(--black-gradient);
     box-shadow: var(--card-shadow);
-    transform: scale(1.15);
-}
-
-.feedback-container .feedback-card:last-child {
-    margin-right: 0;
-}
-
-.feedback-card {
-    background: transparent;
-    transition: all 1s ease;
-}
-
-.feedback-card:hover {
-    background: var(--black-gradient);
     transform: scale(1.15);
 }
 
@@ -160,4 +102,12 @@
 
 .logo {
     animation: scaleLogo 3s infinite; /* Apply the animation, lasting 2 seconds per cycle, and repeat infinitely */
+}
+
+.quoteButton{
+    transition: all 0.7s ease;
+}
+
+.quoteButton:hover{
+    transform: scale(1.15);
 }

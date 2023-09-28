@@ -1,5 +1,6 @@
 import styles from "../style";
-import {abstract, arrowUp, discount} from "../assets";
+import {abstract, discount} from "../assets";
+import Button from "./Button.jsx";
 
 const MainSection = () => {
     return (
@@ -28,17 +29,7 @@ const MainSection = () => {
                     <br/>Dive into a world where every parcel's journey is as exclusive as its destination.
                 </p>
 
-                <div className="ss:flex hidden md:mr-4 mr-0 mt-5">
-                    <button
-                        aria-label="Get Started"
-                        className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-md shadow-md hover:shadow-lg transition-all duration-300"
-                    >
-            <span className="w-[23px] h-[23px] object-contain" aria-hidden="true">
-                <img src={arrowUp} alt="arrow pointing up"/>
-            </span>
-                        <span className="text-gradient">Get Started</span>
-                    </button>
-                </div>
+                <Button styles={`mt-10`}/>
             </div>
 
             <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}>
