@@ -1,5 +1,7 @@
-# Watch&Ship
-![Watch&Ship Logo](logo_link_here.png)
+# Watch & Ship
+<img src="./src/assets/logo.svg" alt="drawing" width="200"/>
+
+[Official Website](https://watchandship.vercel.app/)
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](link_to_build_status)
 [![License](https://img.shields.io/badge/license-MIT-blue)](link_to_license)
@@ -23,7 +25,7 @@
 * **Widespread Coverage**: We operate in multiple cities and are expanding rapidly!
 
 ## Installation
-1. Visit our [official website](link_to_website) to download the app.
+1. Visit our [official website](https://watchandship.vercel.app/) to download the app.
 2. Follow the installation prompts to get started.
 3. Sign up or log in, and you're ready to use **Watch&Ship**!
 
