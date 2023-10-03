@@ -1,5 +1,5 @@
 # Watch & Ship
-<img src="./src/assets/logo.svg" alt="drawing" width="200"/>
+<img src="./public/logo.svg" alt="drawing" width="200"/>
 
 [Official Website](https://watchandship.vercel.app/)
 
