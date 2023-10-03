@@ -1,5 +1,5 @@
-import styles from "../style";
-import {abstract, discount} from "../assets";
+import styles from "../styles/style";
+import {abstract, discount} from "../../public";
 import Button from "./Button.jsx";
 
 const MainSection = () => {

@@ -1,4 +1,4 @@
-import { facebook, instagram, linkedin, twitter } from "../assets";
+import { facebook, instagram, linkedin, twitter } from "../../public";
 
 export const navLinks = [
     {

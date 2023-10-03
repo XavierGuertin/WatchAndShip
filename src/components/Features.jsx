@@ -1,5 +1,5 @@
-import styles, {layout} from "../style";
-import {saveIcon, searchIcon, shippingIcon} from "../assets/index.js";
+import styles, {layout} from "../styles/style";
+import {saveIcon, searchIcon, shippingIcon} from "../../public";
 
 const Features = () => (
     <section id="features" className={layout.section}>

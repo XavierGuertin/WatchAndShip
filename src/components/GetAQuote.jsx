@@ -1,4 +1,4 @@
-import styles from "../style";
+import styles from "../styles/style";
 import Button from "./Button";
 
 const GetAQuote = () => (
