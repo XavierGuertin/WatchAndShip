@@ -1,5 +1,4 @@
 import styles, {layout} from "../styles/style";
-import {saveIcon, searchIcon, shippingIcon} from "../../public";
 
 const Features = () => (
     <section id="features" className={layout.section}>
@@ -18,7 +17,7 @@ const Features = () => (
         <div className={`${layout.sectionImg} flex-col`}>
             <div className={`flex flex-row p-6 rounded-[20px] mb-6 features`}>
                 <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
-                    <img src={searchIcon} alt="star" className="w-[50%] h-[50%] object-contain"/>
+                    <img src="/searchIcon.png" alt="star" className="w-[50%] h-[50%] object-contain"/>
                 </div>
                 <div className="flex-1 flex flex-col ml-3">
                     <h4 className="font-poppins font-semibold text-white text-[25px] leading-[23.4px] mb-1">
@@ -31,7 +30,7 @@ const Features = () => (
             </div>
             <div className={`flex flex-row p-6 rounded-[20px] mb-6 features`}>
                 <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
-                    <img src={shippingIcon} style={{filter: 'invert(1)'}} alt="star"
+                    <img src="/shippingIcon.png" style={{filter: 'invert(1)'}} alt="star"
                          className="w-[50%] h-[50%] object-contain"/>
                 </div>
                 <div className="flex-1 flex flex-col ml-3">
@@ -45,7 +44,7 @@ const Features = () => (
             </div>
             <div className={`flex flex-row p-6 rounded-[20px] mb-6 features`}>
                 <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
-                    <img src={saveIcon} alt="star" className="w-[50%] h-[50%] object-contain"/>
+                    <img src="/saveIcon.png" alt="star" className="w-[50%] h-[50%] object-contain"/>
                 </div>
                 <div className="flex-1 flex flex-col ml-3">
                     <h4 className="font-poppins font-semibold text-white text-[25px] leading-[23.4px] mb-1">

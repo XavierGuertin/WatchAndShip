@@ -1,5 +1,4 @@
 import styles from "../styles/style";
-import {abstract, discount} from "../../public";
 import Button from "./Button.jsx";
 
 const MainSection = () => {
@@ -7,7 +6,7 @@ const MainSection = () => {
         <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY}`}>
             <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
                 <div className="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2">
-                    <img src={discount} alt="discount" className="w-[32px] h-[32px]"/>
+                    <img src="/Discount.svg" alt="discount" className="w-[32px] h-[32px]"/>
                     <p className={`${styles.paragraph} ml-2`}>
                         <span className="text-white">2$</span> Discount For{" "}
                         <span className="text-white">2 Minutes</span> of Ads
@@ -33,7 +32,7 @@ const MainSection = () => {
             </div>
 
             <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}>
-                <img src={abstract} alt="billing" className="w-[100%] h-[100%] relative z-[5] mr-[-50%]"
+                <img src="/abstract.png" alt="billing" className="w-[100%] h-[100%] relative z-[5] mr-[-50%]"
                      style={{transform: 'rotate(90deg)'}}/>
 
                 {/* gradient start */}

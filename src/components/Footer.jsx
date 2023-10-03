@@ -1,6 +1,5 @@
 'use client';
 import styles from "../styles/style";
-import {logo} from "../../public";
 import {footerLinks, socialMedia} from "@/constants";
 
 const Footer = () => (
@@ -8,7 +7,7 @@ const Footer = () => (
         <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
             <div className="flex-[1] flex flex-col justify-start mr-10">
                 <img
-                    src={logo}
+                    src="/logo.svg"
                     alt="watch&ship"
                     className="w-[250px] h-[200px] object-contain"
                 />
