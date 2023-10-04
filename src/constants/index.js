@@ -42,23 +42,32 @@ export const numbers = [
 
 export const footerLinks = [
     {
-        title: "Useful Links",
+        title: "Partners",
         links: [
             {
-                name: "Content",
-                link: "https://www.somewhere.com/content/",
+                name: "Websites",
+                link: "https://www.somewhere.com/websites/",
             },
             {
-                name: "How it Works",
-                link: "https://www.somewhere.com/how-it-works/",
+                name: "Social Medias",
+                link: "https://www.somewhere.com/social-medias/",
             },
             {
-                name: "Create",
-                link: "https://www.somewhere.com/create/",
+                name: "Branding",
+                link: "https://www.somewhere.com/branding/",
+            }
+        ],
+    },
+    {
+        title: "About",
+        links: [
+            {
+                name: "Newsletters",
+                link: "https://www.somewhere.com/newsletters/",
             },
             {
-                name: "Explore",
-                link: "https://www.somewhere.com/explore/",
+                name: "Our Team",
+                link: "https://www.somewhere.com/our-team/",
             },
             {
                 name: "Terms & Services",
@@ -67,41 +76,20 @@ export const footerLinks = [
         ],
     },
     {
-        title: "Community",
+        title: "Support",
         links: [
             {
                 name: "Help Center",
                 link: "https://www.somewhere.com/help-center/",
             },
             {
-                name: "Partners",
-                link: "https://www.somewhere.com/partners/",
+                name: "Contact Us",
+                link: "https://www.somewhere.com/contact-us/",
             },
             {
-                name: "Suggestions",
-                link: "https://www.somewhere.com/suggestions/",
-            },
-            {
-                name: "Blog",
-                link: "https://www.somewhere.com/blog/",
-            },
-            {
-                name: "Newsletters",
-                link: "https://www.somewhere.com/newsletters/",
-            },
-        ],
-    },
-    {
-        title: "Partner",
-        links: [
-            {
-                name: "Our Partner",
-                link: "https://www.somewhere.com/our-partner/",
-            },
-            {
-                name: "Become a Partner",
-                link: "https://www.somewhere.com/become-a-partner/",
-            },
+                name: "Our Objectives",
+                link: "https://www.somewhere.com/our-objectives/",
+            }
         ],
     },
 ];
