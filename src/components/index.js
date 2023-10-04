@@ -5,7 +5,10 @@ import GetAQuote from "./GetAQuote.jsx";
 import Numbers from "./Numbers.jsx";
 import Footer from "./Footer";
 import MainSection from "./MainSection.jsx";
-import LogIn from "./auth/SignIn.jsx";
+import SignIn from "./auth/SignIn.jsx";
+import SignUp from "./auth/SignUp.jsx";
+import AuthDetails from "./auth/AuthDetails";
+
 
 
 export {
@@ -16,5 +19,7 @@ export {
     Numbers,
     GetAQuote,
     Footer,
-    LogIn
+    SignIn,
+    SignUp,
+    AuthDetails
 };

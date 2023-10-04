@@ -1,8 +1,10 @@
-import {LogIn} from "/src/components";
-
+import {SignIn, SignUp, AuthDetails} from "/src/components";
+import './auth.css';
 const Page = () => (
-    <div>
-        <LogIn/>
+    <div className="App">
+        <SignIn/>
+        <SignUp/>
+        <AuthDetails/>
     </div>
 );
 
