@@ -1,4 +1,4 @@
-import styles, {layout} from "../styles/style";
+import styles, {layout} from "/src/styles/style";
 
 const Tracking = () => (
     <section id="quote" className={layout.sectionReverse}>

@@ -1,4 +1,4 @@
-import styles from "../styles/style";
+import styles from "/src/styles/style";
 import Button from "./Button.jsx";
 
 const MainSection = () => {

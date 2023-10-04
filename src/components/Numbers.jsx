@@ -1,5 +1,5 @@
 import { numbers } from "@/constants";
-import styles from "../styles/style";
+import styles from "/src/styles/style";
 
 const Numbers = () => (
   <section className={`${styles.flexCenter} flex-row flex-wrap sm:mb-20 mb-6`}>

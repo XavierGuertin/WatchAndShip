@@ -17,7 +17,7 @@ export const navLinks = [
         title: "Contact",
     },
     {
-        id: "",
+        id: "login",
         title: "Sign In / Sign Up",
     }
 ];

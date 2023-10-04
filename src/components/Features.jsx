@@ -1,4 +1,4 @@
-import styles, {layout} from "../styles/style";
+import styles, {layout} from "/src/styles/style";
 
 const Features = () => (
     <section id="features" className={layout.section}>

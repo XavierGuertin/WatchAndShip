@@ -1,5 +1,5 @@
 'use client';
-import styles from "../styles/style";
+import styles from "/src/styles/style";
 import {footerLinks, socialMedia} from "@/constants";
 
 const Footer = () => (

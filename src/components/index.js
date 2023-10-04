@@ -5,6 +5,8 @@ import GetAQuote from "./GetAQuote.jsx";
 import Numbers from "./Numbers.jsx";
 import Footer from "./Footer";
 import MainSection from "./MainSection.jsx";
+import LogIn from "./auth/SignIn.jsx";
+
 
 export {
     Navbar,
@@ -14,4 +16,5 @@ export {
     Numbers,
     GetAQuote,
     Footer,
+    LogIn
 };
