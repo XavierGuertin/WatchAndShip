@@ -18,8 +18,12 @@ export const navLinks = [
     },
     {
         id: "login",
-        title: "Sign In / Sign Up",
-    }
+        title: "Log in",
+    },
+    {
+        id: "login",
+        title: "Sign Up",
+    },
 ];
 
 export const numbers = [
