@@ -15,15 +15,7 @@ export const navLinks = [
     {
         id: "contact",
         title: "Contact",
-    },
-    {
-        id: "login",
-        title: "Log in",
-    },
-    {
-        id: "login",
-        title: "Sign Up",
-    },
+    }
 ];
 
 export const numbers = [

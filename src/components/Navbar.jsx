@@ -1,12 +1,25 @@
 'use client';
-import { useState } from "react";
-import { navLinks } from "@/constants"
+import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
+import { auth } from "/src/firebase";
+import { navLinks } from "@/constants";
 
 const Navbar = () => {
     const [active, setActive] = useState("Home");
     const [toggle, setToggle] = useState(false);
+    const [authUser] = useAuthState(auth);
     const loginTitle = 'login';
-    const signupTitle = 'login';
+
+    const userSignOut = () => {
+        signOut(auth)
+            .then(() => {
+                console.log("sign out successful");
+            })
+            .catch((error) => console.log(error));
+    };
+
+
 
     return (
         <nav className="w-full flex py-6 justify-between items-center navbar">
@@ -17,12 +30,25 @@ const Navbar = () => {
                     <li
                         key={nav.id}
                         className={`font-poppins font-normal cursor-pointer text-[16px] ${active === nav.title ? "text-white" : "text-dimWhite"
-                            } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
+                            } mr-10`}
                         onClick={() => setActive(nav.title)}
                     >
-                        <a href={`${(nav.id !== loginTitle || nav.id !== signupTitle) ? '#' : "/"}${nav.id}`}>{nav.title}</a>
+                        <a href={`#${nav.id}`}>{nav.title}</a>
                     </li>
                 ))}
+                <li
+                    className="font-poppins font-normal cursor-pointer text-[16px] text-dimWhite mr-10"
+                >
+                    {authUser ? (
+                        <>
+                            <a href="/profile" className="mr-10">{authUser.email}</a>
+                            <button onClick={userSignOut}>Sign Out</button>
+                        </>
+
+                    ) : (
+                        <a href="/login">{loginTitle}</a>
+                    )}
+                </li>
             </ul>
 
             <div className="sm:hidden flex flex-1 justify-end items-center">
@@ -51,6 +77,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
+
         </nav>
     );
 };
