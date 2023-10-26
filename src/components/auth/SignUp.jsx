@@ -6,12 +6,25 @@ import { auth } from "/src/firebase";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [username, setUsername] = useState("");
 
   const signUp = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        const user = userCredential.user;
+        // Add the user's role and name to Firebase Firestore
+        db.collection("users").doc(user.uid).set({
+          role: role,
+          name: username,
+        })
+          .then(() => {
+            console.log("User data added to Firestore");
+          })
+          .catch((error) => {
+            console.error("Error adding user data to Firestore: ", error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -19,28 +32,57 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sign-in-container">
+    <div className="sign-in-container w-full h-full font-poppins z-[20]">
       <form onSubmit={signUp}>
-        <h1>Create Account</h1>
-        <input
-          className="mr-2 bg-blue-100"
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <input
-          className="bg-blue-100"
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <button type="submit"
-          className="bg-green-100 p-2">Sign Up</button>
+        <div className="bg-grey-lighter min-h-screen flex flex-col">
+          <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+            <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+              <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+              <input
+                type="text"
+                className="block border border-grey-light w-full p-3 rounded mb-4"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Name" />
+
+              <input
+                className="block border border-grey-light w-full p-3 rounded mb-4"
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <input
+                className="block border border-grey-light w-full p-3 rounded mb-4"
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div>
+                <label>
+                  <select
+                    className="block border border-grey-light w-full p-3 rounded mb-4"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                  >
+                    <option defaultValue value="Customer">Customer</option>
+                    <option value="Driver">Driver</option>
+                  </select>
+                </label>
+              </div>
+              <button
+                type="submit"
+                className="w-full text-center py-3 rounded bg-blue-gradient text-white focus:outline-none my-1"
+              >Create Account</button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );
 };
 
 export default SignUp;
+
