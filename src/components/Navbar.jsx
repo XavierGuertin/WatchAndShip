@@ -9,7 +9,7 @@ const Navbar = () => {
     const [active, setActive] = useState("Home");
     const [toggle, setToggle] = useState(false);
     const [authUser] = useAuthState(auth);
-    const loginTitle = 'login';
+    const loginTitle = 'Log In';
 
     const userSignOut = () => {
         signOut(auth)
@@ -33,7 +33,7 @@ const Navbar = () => {
                             } mr-10`}
                         onClick={() => setActive(nav.title)}
                     >
-                        <a href={`#${nav.id}`}>{nav.title}</a>
+                        <a href={`/#${nav.id}`}>{nav.title}</a>
                     </li>
                 ))}
                 <li
