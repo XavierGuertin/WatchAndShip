@@ -2,20 +2,23 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "/src/firebase";
+import Alert from 'react-bootstrap/Alert';
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [connectionStatus, setConnectionStatus] = useState(null);
 
     const signIn = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
+                setConnectionStatus("success");
             })
             .catch((error) => {
                 console.log(error);
+                setConnectionStatus("error");
             });
     };
 
@@ -26,6 +29,20 @@ const SignIn = () => {
                     <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                         <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                             <h1 className="mb-8 text-3xl text-center">Log in</h1>
+                            {connectionStatus === "success" ?
+                                <Alert variant="success">
+                                    <Alert.Heading>
+                                        <strong>Success! </strong>You are logged in successfully.<br/>
+                                        <a href="/"><u>Click here</u></a> to go to the main page<br/>
+                                    </Alert.Heading>
+                                </Alert> : null}
+                            {connectionStatus === "error" ?
+                                <Alert variant="danger">
+                                    <Alert.Heading>
+                                        <strong>Error! </strong>Invalid email or password. Please try again.<br/>
+                                    </Alert.Heading>
+                                </Alert> : null}
+
                             <input
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
                                 type="email"
