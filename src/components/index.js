@@ -8,8 +8,14 @@ import MainSection from "./MainSection.jsx";
 import SignIn from "./auth/SignIn.jsx";
 import SignUp from "./auth/SignUp.jsx";
 import AuthDetails from "./auth/AuthDetails";
+import FeedbackDisplay from "./FeedbackDisplay";
 
+import dynamic from 'next/dynamic';
 
+// Import FeedbackModal with SSR disabled
+const FeedbackModal = dynamic(() => import('./FeedbackModal'), {
+    ssr: false,
+  });
 
 export {
     Navbar,
@@ -21,5 +27,7 @@ export {
     Footer,
     SignIn,
     SignUp,
-    AuthDetails
+    AuthDetails,
+    FeedbackModal,
+    FeedbackDisplay
 };
