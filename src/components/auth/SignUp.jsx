@@ -1,13 +1,17 @@
 'use client';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { auth } from "/src/firebase";
+import {auth, db} from "/src/firebase";
+import Alert from "react-bootstrap/Alert";
+import {doc, setDoc} from "firebase/firestore";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("Customer");
   const [username, setUsername] = useState("");
+  const [connectionStatus, setConnectionStatus] = useState(null);
+  const [errorMessage, setError] = useState("");
 
   const signUp = (e) => {
     e.preventDefault();
@@ -15,19 +19,24 @@ const SignUp = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         // Add the user's role and name to Firebase Firestore
-        db.collection("users").doc(user.uid).set({
+        setDoc(doc(db, "users", user.uid), {
           role: role,
-          name: username,
+          email: email,
         })
           .then(() => {
             console.log("User data added to Firestore");
+            setConnectionStatus("success");
           })
           .catch((error) => {
             console.error("Error adding user data to Firestore: ", error);
+            setConnectionStatus("error");
+            setError("Firestore: " + error)
           });
       })
       .catch((error) => {
         console.log(error);
+        setConnectionStatus("error");
+        setError(error.toString())
       });
   };
 
@@ -38,6 +47,20 @@ const SignUp = () => {
           <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
             <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
               <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+
+              {connectionStatus === "success" ?
+                  <Alert variant="success">
+                    <Alert.Heading>
+                      <strong>Success! </strong> The account has been created.<br/>You are logged in successfully.<br/>
+                      <a href="/"><u>Click here</u></a> to go to the main page<br/><br/>
+                    </Alert.Heading>
+                  </Alert> : null}
+              {connectionStatus === "error" ?
+                  <Alert variant="danger">
+                    <Alert.Heading>
+                      <strong>Error! </strong>{errorMessage}<br/><br/>
+                    </Alert.Heading>
+                  </Alert> : null}
               <input
                 type="text"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
