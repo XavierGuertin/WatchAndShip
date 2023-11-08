@@ -9,6 +9,7 @@ import SignIn from "./auth/SignIn.jsx";
 import SignUp from "./auth/SignUp.jsx";
 import AuthDetails from "./auth/AuthDetails";
 import FeedbackDisplay from "./FeedbackDisplay";
+import PaymentForm from "./payment/PaymentForm"
 
 import dynamic from 'next/dynamic';
 
@@ -29,5 +30,6 @@ export {
     SignUp,
     AuthDetails,
     FeedbackModal,
-    FeedbackDisplay
+    FeedbackDisplay,
+    PaymentForm
 };
