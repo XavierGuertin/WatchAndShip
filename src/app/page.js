@@ -1,3 +1,4 @@
+'use client'
 import styles from "/src/styles/style";
 import {Features, Footer, GetAQuote, MainSection, Navbar, Numbers, Tracking} from "../components";
 
