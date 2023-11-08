@@ -4,7 +4,8 @@ import {Features, Footer, GetAQuote, MainSection, Navbar, Numbers, Tracking, Fee
 
 const ratingTest = {
     rating: 4,
-    comment: 'The service was great! But the delivery was a bit late.'
+    comment: 'The service was great! But the delivery was a bit late.',
+    date: new Date(2023,11,8,9,8,20,20)
 }
 
 const Page = () => (
