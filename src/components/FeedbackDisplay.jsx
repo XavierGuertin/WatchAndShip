@@ -17,7 +17,7 @@ const FeedbackDisplay = ({ feedback }) => {
 
     const handleReply = () => {
         if (wordCount >= 10) {
-            const newReplies = [...replies, { content: reply, date: new Date() }];
+            const newReplies = [...replies, { content: reply, date: new Date(), userID: 1, username: "Customer Support" }];
             setReplies(newReplies);
             feedback.replies = newReplies;
             setResponseSuccess(true);
@@ -48,6 +48,7 @@ const FeedbackDisplay = ({ feedback }) => {
             {/* Display the list of previous replies */}
             {replies.map((response, index) => (
                 <div key={index} className="bg-gray-100 p-2 rounded mt-2">
+                    <p className="text-xs text-gray-500">{response.username ? response.username : ""}</p>
                     <p className="text-gray-600">{response.content}</p>
                     <p className="text-xs text-gray-500">{isClient ? response.date.toLocaleString() : ""}</p>
                 </div>
