@@ -1,12 +1,6 @@
 'use client'
 import styles from "/src/styles/style";
-import {Features, Footer, GetAQuote, MainSection, Navbar, Numbers, Tracking, FeedbackModal, FeedbackDisplay} from "../components";
-
-const ratingTest = {
-    rating: 4,
-    comment: 'The service was great! But the delivery was a bit late.',
-    date: new Date(2023,11,8,9,8,20,20)
-}
+import {Features, Footer, GetAQuote, MainSection, Navbar, Numbers, Tracking} from "../components";
 
 const Page = () => (
     <div className="bg-primary w-full overflow-hidden">
@@ -25,8 +19,6 @@ const Page = () => (
         <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
             <div className={`${styles.boxWidth}`}>
                 <Features/>
-                <FeedbackDisplay feedback={ratingTest} />
-                <FeedbackModal/>
                 <Tracking/>
                 <GetAQuote/>
                 <Numbers/>
