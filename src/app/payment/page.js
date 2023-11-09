@@ -1,6 +1,6 @@
 'use client';
 import { PaymentForm } from "src/components";
-import "./payment.css";
+import "/src/app/login/auth.css";
 import styles from "/src/styles/style";
 import { Navbar } from "@/components";
 import React, { useEffect } from "react";

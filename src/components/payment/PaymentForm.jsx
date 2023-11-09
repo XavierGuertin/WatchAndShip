@@ -53,6 +53,7 @@ const PaymentForm = () => {
 
     // Send user back home after 3 seconds
     const sendBackHome = () => {
+        document.getElementById("pay-button").disabled = true;
         const timer = setTimeout(() => {
             router.push('/')
         }, 3000);
@@ -72,6 +73,7 @@ const PaymentForm = () => {
                                     placeholder="16 Digit Card Number"
                                     pattern="[0-9]{16}"
                                     value={cardNumber}
+                                    required={true}
                                     onChange={(e) => setCardNumber(e.target.value)}
                                 />
                                 <input
@@ -79,6 +81,7 @@ const PaymentForm = () => {
                                     type="expDate"
                                     placeholder="MM/YY"
                                     value={expDate}
+                                    required={true}
                                     onChange={(e) => setExpDate(e.target.value)}
                                 />
                                 <input
@@ -87,10 +90,12 @@ const PaymentForm = () => {
                                     placeholder="CVC"
                                     pattern="[0-9]{3}"
                                     value={cvc}
+                                    required={true}
                                     onChange={(e) => setCvc(e.target.value)}
                                 />
                                 <button
                                     type="submit"
+                                    id="pay-button"
                                     className="w-full text-center py-3 rounded bg-blue-gradient text-white focus:outline-none my-1"
                                 >Submit</button>
                             </div>
