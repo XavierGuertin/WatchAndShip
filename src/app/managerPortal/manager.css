@@ -1,0 +1,9 @@
+.accordion {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.card:hover .accordion {
+    max-height: 500px;
+}
