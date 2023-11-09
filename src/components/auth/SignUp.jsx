@@ -40,6 +40,13 @@ const SignUp = () => {
             setConnectionStatus("error");
             setError("Firestore: " + error)
           });
+
+        window.localStorage.setItem('userUID', userCredential.user.uid);
+      })
+      .catch((error) => {
+        console.log(error);
+        setConnectionStatus("error");
+        setError(error.toString())
       });
 
   }

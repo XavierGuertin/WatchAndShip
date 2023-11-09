@@ -15,6 +15,7 @@ const Navbar = () => {
         signOut(auth)
             .then(() => {
                 console.log("sign out successful");
+                window.localStorage.setItem('userUID', null);
             })
             .catch((error) => console.log(error));
     };
@@ -24,7 +25,7 @@ const Navbar = () => {
             <a href="/"><img src="/logo.svg" alt="watch&ship" className="logo w-[124px] h-[100px]" /></a>
 
             <ul className="list-none sm:flex hidden justify-end items-center flex-1">
-                {navLinks.map((nav, index) => (
+                {navLinks.map((nav) => (
                     <li
                         key={nav.id}
                         className={`font-poppins font-normal cursor-pointer text-[16px] ${active === nav.title ? "text-white" : "text-dimWhite"

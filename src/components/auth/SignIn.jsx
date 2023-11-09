@@ -14,6 +14,7 @@ const SignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
+                window.localStorage.setItem('userUID', userCredential.user.uid);
                 setConnectionStatus("success");
             })
             .catch((error) => {
