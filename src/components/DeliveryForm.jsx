@@ -9,17 +9,28 @@ import {db} from "@/firebase";
 
 const libraries = ["places"];
 
-const DeliveryForm = ({userID}) => {
+const DeliveryForm = () => {
 
     const [weight, setWeight] = useState("");
     const todayDate = new Date();
     const [date, setDate] = useState(new Date());
     const [distance, setDistance] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
 
     const pickupRef = React.useRef("");
     const deliveryRef = React.useRef("");
+
+    const [userUID] = React.useState(() => {
+        if (typeof window !== 'undefined') {
+            const from_localStorage = window.localStorage.getItem('userUID')
+            if (from_localStorage === null || from_localStorage === undefined) {
+                return 'unknown'
+            }
+
+            return `${from_localStorage}` ? from_localStorage : 'unknown'
+        }
+        return 'notFound'
+    });
 
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: "AIzaSyDSsKRcXAzvvp4QH4UVM-OipqWva5iIK_U",
@@ -45,7 +56,6 @@ const DeliveryForm = ({userID}) => {
     const getQuote = async (e) => {
         e.preventDefault();
 
-        console.log('userID:', userID);
         const amount = calculateDeliveryFee(weight, distance, date);
         if (window.confirm(`The quote has been created successfully!\nThe amount is ${amount} $. Do you want to proceed to payment?`)) {
             //Add the order to the firestore and set the status to not-paid
@@ -57,16 +67,16 @@ const DeliveryForm = ({userID}) => {
                 distance: distance,
                 pointA: pickupRef.current.value,
                 pointB: deliveryRef.current.value,
-                price: price,
+                price: amount,
                 rating: null,
                 status: "not-paid",
-                user: userID,
+                user: userUID,
                 weight: weight,
             };
             const docRef = await addDoc(collection(db, "orders"), docData);
 
             //Redirect to payment page
-            window.location.href = "/payment&orderID=" + docRef.id + "&userID=" + amount;
+            window.location.href = "/payment&orderID=" + docRef.id + "&userID=" + userUID;
 
         } //else go back to form
     };
@@ -118,8 +128,6 @@ const DeliveryForm = ({userID}) => {
         }
 
         // Round to 2 decimal places for currency
-        setPrice(Math.round(fee * 100) / 100);
-
         return Math.round(fee * 100) / 100;
     }
 
@@ -151,7 +159,7 @@ const DeliveryForm = ({userID}) => {
                                     type="text"
                                     placeholder="Pick Up Address"
                                     ref={pickupRef}
-                                    onChange={(e) => setDistance("")}
+                                    onChange={() => setDistance("")}
                                 />
                             </Autocomplete>
                             <Autocomplete>
@@ -160,7 +168,7 @@ const DeliveryForm = ({userID}) => {
                                     type="text"
                                     placeholder="Delivery Address"
                                     ref={deliveryRef}
-                                    onChange={(e) => setDistance("")}
+                                    onChange={() => setDistance("")}
                                 />
                             </Autocomplete>
 

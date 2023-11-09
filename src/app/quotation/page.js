@@ -5,7 +5,6 @@ import {redirect} from "next/navigation";
 import {auth} from "@/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import React, {useEffect} from "react";
-import {onAuthStateChanged} from "firebase/auth";
 
 const Page = () => {
     const [user, loading] = useAuthState(auth);
@@ -16,14 +15,6 @@ const Page = () => {
         }
     }, [user, loading]);
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            const uid = user.uid;
-            const currentUser = user;
-        } else {
-            const currentUser = null;
-        }
-    });
     return (
         <div className="App bg-primary">
             <div className={`${styles.paddingX} ${styles.flexCenter}`}>
@@ -38,8 +29,7 @@ const Page = () => {
 
             {user ?
                 <div className="flex justify-between px-16">
-                    <div><a>test2 {user.toJSON().toString()}</a></div>
-                    <DeliveryForm data={uid}/>
+                    <DeliveryForm/>
                 </div>
                 :
                 null
