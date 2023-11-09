@@ -33,7 +33,7 @@ const DeliveryForm = () => {
     });
 
     const {isLoaded} = useJsApiLoader({
-        googleMapsApiKey: secrets.MAPS_API,
+        googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API,
         libraries
     });
 
