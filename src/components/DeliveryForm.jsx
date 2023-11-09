@@ -33,7 +33,7 @@ const DeliveryForm = () => {
     });
 
     const {isLoaded} = useJsApiLoader({
-        googleMapsApiKey: "AIzaSyDSsKRcXAzvvp4QH4UVM-OipqWva5iIK_U",
+        googleMapsApiKey: secrets.MAPS_API,
         libraries
     });
 
