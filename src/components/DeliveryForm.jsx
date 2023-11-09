@@ -33,7 +33,7 @@ const DeliveryForm = () => {
     });
 
     const {isLoaded} = useJsApiLoader({
-        googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API,
+        googleMapsApiKey: process.env.MAPS_API,
         libraries
     });
 
@@ -61,7 +61,7 @@ const DeliveryForm = () => {
             //Add the order to the firestore and set the status to not-paid
             const docData = {
                 courier: null,
-                date: date,
+                deliveryDate: date,
                 description: description,
                 discount: null,
                 distance: distance,

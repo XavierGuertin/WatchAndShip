@@ -16,11 +16,23 @@ const Navbar = () => {
             .then(() => {
                 console.log("sign out successful");
                 window.localStorage.setItem('userUID', null);
+                window.localStorage.setItem('userRole', null);
+
             })
             .catch((error) => console.log(error));
     };
 
-
+    function getPortalLink() {
+        if (window.localStorage.getItem('userRole') === 'Customer') {
+            return "/userPortal"
+        } else if (window.localStorage.getItem('userRole') === 'Courier') {
+            return "/courierPortal"
+        } else if (window.localStorage.getItem('userRole') === 'Admin') {
+            return "/managerPortal"
+        } else {
+            return "/issue"
+        }
+    }
 
     return (
         <nav className="w-full flex py-6 justify-between items-center navbar">
@@ -42,7 +54,7 @@ const Navbar = () => {
                 >
                     {authUser ? (
                         <>
-                            <a href="/profile" className="mr-10">{authUser.email}</a>
+                            <a href={getPortalLink()} className="mr-10">{authUser.email}</a>
                             <button onClick={userSignOut}>Sign Out</button>
                         </>
 
