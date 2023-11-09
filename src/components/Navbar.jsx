@@ -19,11 +19,9 @@ const Navbar = () => {
             .catch((error) => console.log(error));
     };
 
-
-
     return (
         <nav className="w-full flex py-6 justify-between items-center navbar">
-            <a href="/"><img src="/logo.svg" alt="watch&ship" className="logo w-[124px] h-[100px]"/></a>
+            <a href="/"><img src="/logo.svg" alt="watch&ship" className="logo w-[124px] h-[100px]" /></a>
 
             <ul className="list-none sm:flex hidden justify-end items-center flex-1">
                 {navLinks.map((nav, index) => (
@@ -41,7 +39,7 @@ const Navbar = () => {
                 >
                     {authUser ? (
                         <>
-                            <a href="/profile" className="mr-10">{authUser.email}</a>
+                            <a href="/profile" className="mr-10">{authUser.displayName}</a>
                             <button onClick={userSignOut}>Sign Out</button>
                         </>
 
