@@ -6,14 +6,13 @@ import { Navbar } from "@/components";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "@/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 const Page = () => {
 
-    const [user] = useAuthState(auth);
     const router = useRouter();
 
-    useEffect(() => auth.onAuthStateChanged(user => {
+    // Send user to login if not signed in
+    useEffect(() => auth.onAuthStateChanged(async user => {
         if (!user) {
             router.push('/login');
         }
