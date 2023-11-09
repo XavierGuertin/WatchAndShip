@@ -110,3 +110,7 @@
 .quoteButton:hover{
     transform: scale(1.15);
 }
+
+textarea {
+    resize: none;
+}

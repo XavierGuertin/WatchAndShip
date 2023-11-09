@@ -7,9 +7,9 @@ import Footer from "./Footer";
 import MainSection from "./MainSection.jsx";
 import SignIn from "./auth/SignIn.jsx";
 import SignUp from "./auth/SignUp.jsx";
-import AuthDetails from "./auth/AuthDetails";
 import FeedbackDisplay from "./FeedbackDisplay";
-import PaymentForm from "./payment/PaymentForm"
+import PaymentForm from "./payment/PaymentForm";
+import DeliveryForm from "@/components/DeliveryForm";
 
 import dynamic from 'next/dynamic';
 
@@ -28,8 +28,8 @@ export {
     Footer,
     SignIn,
     SignUp,
-    AuthDetails,
     FeedbackModal,
     FeedbackDisplay,
-    PaymentForm
+    PaymentForm,
+    DeliveryForm
 };
