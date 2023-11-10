@@ -38,9 +38,6 @@ const PaymentForm = () => {
 
             await addDoc(collection(db, "transactions"), {
                 timeStamp: serverTimestamp(),
-                cardNumber: cardNumber,
-                ExpirationDate: expDate,
-                cvc: cvc,
                 order: orderDocRef,
                 user: userDocRef
             });
