@@ -4,39 +4,17 @@ import styles from "/src/styles/style";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from 'next/router';
 import { Navbar } from "@/components";
-import { useEffect, useState } from 'react';
-import { auth, db } from "/src/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { useState } from 'react';
+import { auth } from "/src/firebase";
+import OrderList from "@/components/manager/OrderList";
+import SupportList from "@/components/manager/SupportList";
 
 const Page = () => {
-    const [authUser] = useAuthState(auth);
-    const [orders, setOrders] = useState([]);
+    const [authUser, loading] = useAuthState(auth);
+    const [view, setView] = useState('OrderList');
 
-    useEffect(() => {
-        if (authUser) {
-            // Get all orders
-            getDocs(collection(db, 'orders')).then((querySnapshot) => {
-                const ordersData = [];
-                querySnapshot.forEach((doc) => {
-                    let order = {
-                        orderID: doc.id,
-                        orderData: doc.data()
-                    }
-                    ordersData.push(order);
-                    console.log(order)
-                });
-                setOrders(ordersData);
-            });
-        }
-    }, [authUser]);
-
-    const formatDate = (date) => {
-        const d = new Date(date);
-        const day = ("0" + d.getDate()).slice(-2);
-        const month = ("0" + (d.getMonth() + 1)).slice(-2);
-        const year = d.getFullYear();
-
-        return `${day}/${month}/${year}`;
+    const handleClick = (viewName) => {
+        setView(viewName);
     }
 
     return (
@@ -46,41 +24,13 @@ const Page = () => {
                     <Navbar />
                 </div>
             </div>
-            <div className="h-full bg-primary">
-                {orders.map((order, index) => (
-                    <div key={index}>
-                        {/* Add more fields as necessary */}
-                        <div className="card max-w-xl mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5 group transition-all ease-in-out duration-200 transform group-hover:scale-105">
-                            <div className="flex">
-                                <div className="p-8 w-full">
-                                    <div className="flex justify-between">
-                                        <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{order.orderID}</div>
-                                        <p className="tracking-wide text-sm text-white font-semibold rounded-md p-1 bg-indigo-500">{order.orderData.status}</p>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.date.seconds * 1000)}</p>{console.log()}
-                                        <p className="block mt-1 text-lg leading-tight font-medium text-black">{order.orderData.price}$</p>
-                                    </div>
-                                    <div className="accordion opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                        <div className="flex justify-between border-b pb-2">
-                                            <p className="mt-2 text-gray-500">Weight: {order.orderData.weigth} lbs</p>
-                                            <p className="mt-2 text-gray-500">Discount: {order.orderData.discount}$</p>
-                                        </div>
-
-                                        <p className="mt-2 text-gray-500">From: {order.orderData.pointA}</p>
-                                        <p className="mt-2 text-gray-500">To: {order.orderData.pointB}</p>
-                                        <p className="mt-2 text-gray-500">Distance: {order.orderData.distance} km</p>
-
-                                        <p className="mt-2 text-gray-500">Rating: {order.orderData.rating}</p>
-                                        <p className="mt-2 text-gray-500 text-justify">{order.orderData.description}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+            <div className="text-center ">
+                <button onClick={() => handleClick('OrderList')} className={`mx-auto rounded-l-xl text-${view == "OrderList" ? 'white' : 'black'} shadow-md m-5 p-2 bg-${view == "OrderList" ? 'indigo-500' : 'white'}`}>Order lists</button>
+                <button onClick={() => handleClick('SupportList')} className={`mx-auto rounded-r-xl shadow-md m-5 p-2 text-${view == "SupportList" ? 'white' : 'black'}  bg-${view == "SupportList" ? 'indigo-500' : 'white'}`}>Support</button>
 
             </div>
+            {view === 'OrderList' && <OrderList />}
+            {view === 'SupportList' && <SupportList />}
         </div>
     );
 };
