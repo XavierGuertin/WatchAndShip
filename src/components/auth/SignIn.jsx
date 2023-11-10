@@ -1,20 +1,35 @@
 'use client';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { auth } from "/src/firebase";
+import {auth, db} from "/src/firebase";
 import Alert from 'react-bootstrap/Alert';
+import {doc, getDoc} from "firebase/firestore";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [connectionStatus, setConnectionStatus] = useState(null);
 
+    async function returnRole(uid) {
+        const docRef = doc(db, "users", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            return docSnap.data().role;
+        } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+            return "notFound";
+        }
+    }
     const signIn = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(async (userCredential) => {
                 console.log(userCredential);
                 window.localStorage.setItem('userUID', userCredential.user.uid);
+                window.localStorage.setItem('userRole', await returnRole(userCredential.user.uid));
                 setConnectionStatus("success");
             })
             .catch((error) => {
