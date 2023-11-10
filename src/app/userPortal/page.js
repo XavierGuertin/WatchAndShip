@@ -1,11 +1,12 @@
 "use client"
+import '../managerPortal/manager.css';
 import styles from "/src/styles/style";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter, redirect } from 'next/router'; // Assuming 'redirect' is imported from 'next/router'
 import { Navbar, FeedbackDisplay, FeedbackModal, Footer } from "@/components";
 import { useEffect, useState } from 'react';
 import { auth, db } from "/src/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore"; // Add 'query' and 'where' to imports for Firestore
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const Page = () => {
     const [user, loading] = useAuthState(auth);
@@ -106,7 +107,7 @@ const Page = () => {
                                         <p className="mt-2 text-gray-500">To: {order.orderData.pointB}</p>
                                         <p className="mt-2 text-gray-500">Distance: {order.orderData.distance} km</p>
 
-                                        {paid[index] && (reviews[index] ? (
+                                        {paidList[index] && (reviews[index] ? (
                                             <button
                                                 className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-2"
                                                 onClick={() => handleReviewClick(index)}
