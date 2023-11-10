@@ -40,6 +40,15 @@ const SignUp = () => {
             setConnectionStatus("error");
             setError("Firestore: " + error)
           });
+
+        window.localStorage.setItem('userUID', userCredential.user.uid);
+        window.localStorage.setItem('userRole', role);
+
+      })
+      .catch((error) => {
+        console.log(error);
+        setConnectionStatus("error");
+        setError(error.toString())
       });
 
   }
@@ -94,7 +103,7 @@ const SignUp = () => {
                     onChange={(e) => setRole(e.target.value)}
                   >
                     <option defaultValue value="Customer">Customer</option>
-                    <option value="Driver">Driver</option>
+                    <option value="Courier">Courier</option>
                   </select>
                 </label>
               </div>

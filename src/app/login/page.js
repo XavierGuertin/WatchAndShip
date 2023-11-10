@@ -1,5 +1,5 @@
 'use client';
-import { SignIn, SignUp } from "/src/components";
+import {Footer, SignIn, SignUp} from "/src/components";
 import './auth.css';
 import styles from "/src/styles/style";
 import { Navbar } from "@/components";
@@ -35,6 +35,12 @@ const Page = () => {
                     <SignUp/>
                 </div>
             }
+
+            <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+                <div className={`${styles.boxWidth}`}>
+                    <Footer/>
+                </div>
+            </div>
         </div>
     );
 };

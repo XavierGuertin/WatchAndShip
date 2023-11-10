@@ -1,0 +1,23 @@
+name: Build Secret
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.18.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+        env:
+          MAPS_API: ${{ secrets.MAPS_API }}

@@ -15,16 +15,31 @@ const Navbar = () => {
         signOut(auth)
             .then(() => {
                 console.log("sign out successful");
+                window.localStorage.setItem('userUID', null);
+                window.localStorage.setItem('userRole', null);
+
             })
             .catch((error) => console.log(error));
     };
+
+    function getPortalLink() {
+        if (window.localStorage.getItem('userRole') === 'Customer') {
+            return "/userPortal"
+        } else if (window.localStorage.getItem('userRole') === 'Courier') {
+            return "/courierPortal"
+        } else if (window.localStorage.getItem('userRole') === 'Admin') {
+            return "/managerPortal"
+        } else {
+            return "/issue"
+        }
+    }
 
     return (
         <nav className="w-full flex py-6 justify-between items-center navbar">
             <a href="/"><img src="/logo.svg" alt="watch&ship" className="logo w-[124px] h-[100px]" /></a>
 
             <ul className="list-none sm:flex hidden justify-end items-center flex-1">
-                {navLinks.map((nav, index) => (
+                {navLinks.map((nav) => (
                     <li
                         key={nav.id}
                         className={`font-poppins font-normal cursor-pointer text-[16px] ${active === nav.title ? "text-white" : "text-dimWhite"
@@ -39,7 +54,7 @@ const Navbar = () => {
                 >
                     {authUser ? (
                         <>
-                            <a href="/profile" className="mr-10">{authUser.displayName}</a>
+                            <a href={getPortalLink()} className="mr-10">{authUser.displayName}</a>
                             <button onClick={userSignOut}>Sign Out</button>
                         </>
 
