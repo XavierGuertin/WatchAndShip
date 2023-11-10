@@ -76,7 +76,7 @@ const DeliveryForm = () => {
             const docRef = await addDoc(collection(db, "orders"), docData);
 
             //Redirect to payment page
-            window.location.href = "/payment&orderID=" + docRef.id + "&userID=" + userUID;
+            window.location.href = "/payment?orderID=" + docRef.id;
 
         } //else go back to form
     };
