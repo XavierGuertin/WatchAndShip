@@ -11,7 +11,8 @@ const Page = () => {
     const [user, loading] = useAuthState(auth);
 
     useEffect(() => {
-        if (!loading && !user || !loading && window.localStorage.getItem('role') !== 'Manager' && window.localStorage.getItem('role') !== null) {
+        if (!loading && !user || !loading && window.localStorage.getItem('role') !== 'Courier' && window.localStorage.getItem('role') !== null) {
+            console.log('test' + window.localStorage.getItem('role'));
             redirect('/')
         }
     }, [user, loading]);
@@ -29,8 +30,7 @@ const Page = () => {
                 className="absolute z-[0] opacity-70 w-[60%] h-[80%] -bottom-[190%] top-80 right-10 rounded-full blue__gradient"/>
 
             <div className="flex justify-between px-16">
-                {/*Component*/}
-                <a className="text-blue-50">This is the manager's portal</a>
+                {/*<OrdersDataGrid/>*/}
             </div>
 
             <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>

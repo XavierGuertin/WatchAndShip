@@ -1,63 +1,54 @@
 "use client"
-import '../managerPortal/manager.css';
 import styles from "/src/styles/style";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useRouter } from 'next/router';
-import { Navbar, FeedbackDisplay, FeedbackModal } from "@/components";
+import { useRouter, redirect } from 'next/router'; // Assuming 'redirect' is imported from 'next/router'
+import { Navbar, FeedbackDisplay, FeedbackModal, Footer } from "@/components";
 import { useEffect, useState } from 'react';
 import { auth, db } from "/src/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore"; // Add 'query' and 'where' to imports for Firestore
 
 const Page = () => {
-    const [authUser] = useAuthState(auth);
-    console.log(authUser);
+    const [user, loading] = useAuthState(auth);
+    const [authUser, setAuthUser] = useState(null);
     const [orders, setOrders] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [promptReview, setPromptReview] = useState([]);
-    const [paid, setPaidList] = useState([]);
-
+    const [paidList, setPaidList] = useState([]);
 
     useEffect(() => {
-        if (authUser) {
-            //         // Create a query against the collection.
-            //         const ordersRef = collection(db, 'orders');
-            //         const q = query(ordersRef, where("userUID", "==", authUser.uid)); // Use authUser.uid
+        if (!loading && !user || !loading && window.localStorage.getItem('role') !== 'Customer' && window.localStorage.getItem('role') !== null) {
+            redirect('/');
+        }
 
-            //         // Use the query for getting documents
-            //         getDocs(q).then((querySnapshot) => {
-            getDocs(collection(db, 'orders')).then((querySnapshot) => {
+        if (user) {
+            setAuthUser(user); 
+            const ordersRef = collection(db, 'orders');
+            const q = query(ordersRef, where("userUID", "==", user.uid)); 
+
+            getDocs(q).then((querySnapshot) => {
                 const ordersData = [];
                 const reviewList = [];
                 const promptList = [];
-                const paidList = [];
+                const paidListTemp = []; 
                 querySnapshot.forEach((doc) => {
                     let order = {
                         orderID: doc.id,
                         orderData: doc.data()
-                    }
+                    };
                     ordersData.push(order);
-                    console.log(order)
                 });
                 setOrders(ordersData);
                 ordersData.forEach(order => {
-                    console.log(order.orderData.rating);
-                    if ((order.orderData.rating == "" || order.orderData.rating == null))
-                        reviewList.push(true);
-                    else
-                        reviewList.push(false);
-
-                    if (order.orderData.status == "paid")
-                        paidList.push(true);
-                    else
-                        paidList.push(false);
+                    reviewList.push(order.orderData.rating == "" || order.orderData.rating == null);
+                    paidListTemp.push(order.orderData.status == "paid");
                     promptList.push(false);
                 });
-                setPaidList(paidList);
+                setPaidList(paidListTemp);
                 setReviews(reviewList);
                 setPromptReview(promptList);
             });
         }
-    }, [authUser]);
+    }, [user, loading]);
 
     const handleReviewClick = (index) => {
         setPromptReview((currentPromptReview) =>
@@ -133,7 +124,11 @@ const Page = () => {
                         </div>
                     </div>
                 ))}
-
+            </div>
+            <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+                <div className={`${styles.boxWidth}`}>
+                    <Footer />
+                </div>
             </div>
         </div>
     );
