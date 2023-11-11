@@ -20,4 +20,4 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          MAPS_API: ${{ secrets.MAPS_API }}
+          NEXT_PUBLIC_MAPS_API: ${{ secrets.NEXT_PUBLIC_MAPS_API }}
