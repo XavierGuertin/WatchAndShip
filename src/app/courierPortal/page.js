@@ -1,4 +1,5 @@
 'use client';
+import { UpdateOrderStatus } from "src/components";
 import styles from "/src/styles/style";
 import {Footer, Navbar} from "@/components";
 import {redirect} from "next/navigation";
@@ -30,7 +31,7 @@ const Page = () => {
                 className="absolute z-[0] opacity-70 w-[60%] h-[80%] -bottom-[190%] top-80 right-10 rounded-full blue__gradient"/>
 
             <div className="flex justify-between px-16">
-                {/*<OrdersDataGrid/>*/}
+                {<UpdateOrderStatus/>}
             </div>
 
             <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
