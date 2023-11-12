@@ -32,8 +32,9 @@ const DeliveryForm = () => {
         return 'notFound'
     });
 
-    const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: process.env.MAPS_API,
+
+    const {isLoaded} = useJsApiLoader({
+        googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API,
         libraries
     });
 
