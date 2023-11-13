@@ -1,17 +1,20 @@
 "use client"
 import '../../app/managerPortal/manager.css';
-import {useEffect, useState} from 'react';
-import {db} from "/src/firebase";
-import {collection, getDocs} from "firebase/firestore";
+import { useEffect, useState } from 'react';
+import { db } from "/src/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { FeedbackDisplay } from '..';
 
 const OrderList = () => {
 
     const [orders, setOrders] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         // Get all orders
         getDocs(collection(db, 'orders')).then((querySnapshot) => {
             const ordersData = [];
+            const reviewList = [];
             querySnapshot.forEach((doc) => {
                 let order = {
                     orderID: doc.id,
@@ -21,6 +24,10 @@ const OrderList = () => {
 
             });
             setOrders(ordersData);
+            ordersData.forEach(order => {
+                reviewList.push(order.orderData.rating === "" || order.orderData.rating == null);
+            });
+            setReviews(reviewList);
         });
     }, []);
 
@@ -62,7 +69,10 @@ const OrderList = () => {
                                     <p className="mt-2 text-gray-500">To: {order.orderData.pointB}</p>
                                     <p className="mt-2 text-gray-500">Distance: {order.orderData.distance} km</p>
 
-                                    <p className="mt-2 text-gray-500">Rating: {order.orderData.rating.rating} stars</p>
+                                    {(reviews[index] ? null : (
+                                        <FeedbackDisplay feedback={order.orderData.rating} orderID={order.orderID} />
+                                    ))}
+
                                     <p className="mt-2 text-gray-500 text-justify">{order.orderData.description}</p>
                                 </div>
                             </div>
