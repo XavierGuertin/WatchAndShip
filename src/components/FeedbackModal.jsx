@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { FiStar } from 'react-icons/fi';
+import React, {useState} from 'react';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import {FiStar} from 'react-icons/fi';
 import Response from './Response';
-import { auth, db } from "/src/firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import {auth, db} from "/src/firebase";
+import {doc, updateDoc} from "firebase/firestore";
 
-const FeedbackModal = ({ orderProp, onClose }) => {
+const FeedbackModal = ({orderProp, onClose}) => {
     const [authUser] = useAuthState(auth);
     const [order, setOrder] = useState(orderProp);
     const [isOpen, setIsOpen] = useState(true);
@@ -37,7 +37,7 @@ const FeedbackModal = ({ orderProp, onClose }) => {
             const orderDocRef = doc(db, 'orders', order.orderID);
 
             const newRating = {
-                rating: rating, 
+                rating: rating,
                 comment: comment,
                 date: new Date(),
                 replies: []
@@ -56,7 +56,7 @@ const FeedbackModal = ({ orderProp, onClose }) => {
             } catch (error) {
                 console.error("Error updating order: ", error);
                 setResponseSuccess(false);
-                setResponseMessage("Error: " + { error });
+                setResponseMessage("Error: " + {error});
                 setIsResponseVisible(true);
                 setTimeout(() => setIsResponseVisible(false), 3000);
             }
@@ -77,9 +77,10 @@ const FeedbackModal = ({ orderProp, onClose }) => {
 
     return (
         <div className="w-full h-full">
-            {isResponseVisible && <Response success={responseSuccess} message={responseMessage} />}
+            {isResponseVisible && <Response success={responseSuccess} message={responseMessage}/>}
             {isOpen && (
-                <div style={{ zIndex: 1000 }} className="modal fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                <div style={{zIndex: 1000}}
+                     className="modal fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                     <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center space-y-4 w-1/2 h-2/3">
                         <button className="self-end" onClick={handleCloseClick}>×</button>
                         <h2 className="font-bold text-xl">How would you rate our service?</h2>
@@ -88,7 +89,7 @@ const FeedbackModal = ({ orderProp, onClose }) => {
                                 <FiStar
                                     key={index}
                                     className={`cursor-pointer transition-colors ${(hoverRating || rating) >= index ? 'text-yellow-400' : 'text-gray-400'
-                                        }`}
+                                    }`}
                                     onMouseEnter={() => onStarHover(index)}
                                     onMouseLeave={() => setHoverRating(undefined)}
                                     onClick={() => onStarClick(index)}
@@ -105,7 +106,8 @@ const FeedbackModal = ({ orderProp, onClose }) => {
                             <p className="text-xs">{wordCount}</p>
                             <p className="text-xs">*min 10 words</p>
                         </div>
-                        <button className="bg-blue-500 text-white py-2 px-4 rounded-lg" onClick={handleSendClick}>Send</button>
+                        <button className="bg-blue-500 text-white py-2 px-4 rounded-lg" onClick={handleSendClick}>Send
+                        </button>
                     </div>
                 </div>
             )}

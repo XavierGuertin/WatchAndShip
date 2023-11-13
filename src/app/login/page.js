@@ -2,7 +2,7 @@
 import {Footer, SignIn, SignUp} from "/src/components";
 import './auth.css';
 import styles from "/src/styles/style";
-import { Navbar } from "@/components";
+import {Navbar} from "@/components";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "@/firebase";
 import React from "react";

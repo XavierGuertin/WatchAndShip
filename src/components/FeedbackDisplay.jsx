@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { FiStar } from 'react-icons/fi';
+import React, {useEffect, useState} from 'react';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import {FiStar} from 'react-icons/fi';
 import Response from './Response';
-import { auth, db } from "/src/firebase";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import {auth, db} from "/src/firebase";
+import {arrayUnion, doc, updateDoc} from "firebase/firestore";
 
-const FeedbackDisplay = ({ feedback, orderID }) => {
+const FeedbackDisplay = ({feedback, orderID}) => {
     const [authUser] = useAuthState(auth);
     const [replies, setReplies] = useState(feedback.replies || []);
     const [reply, setReply] = useState('');
@@ -21,7 +21,7 @@ const FeedbackDisplay = ({ feedback, orderID }) => {
 
     const handleReply = async () => {
         if (wordCount >= 10 && authUser) {
-            const newReply = { content: reply, date: new Date(), userID: authUser.uid, username: authUser.displayName };
+            const newReply = {content: reply, date: new Date(), userID: authUser.uid, username: authUser.displayName};
             const orderDocRef = doc(db, 'orders', orderID);
 
             try {
@@ -57,11 +57,12 @@ const FeedbackDisplay = ({ feedback, orderID }) => {
     }
 
     return (
-        <div className="bg-white p-6 mt-4 rounded-lg shadow-xl flex flex-col space-y-4 max-h-48 overflow-y-auto border border-gray-300">
-            {isResponseVisible && <Response success={responseSuccess} message={responseMessage} />}
+        <div
+            className="bg-white p-6 mt-4 rounded-lg shadow-xl flex flex-col space-y-4 max-h-48 overflow-y-auto border border-gray-300">
+            {isResponseVisible && <Response success={responseSuccess} message={responseMessage}/>}
             <h3 className="font-bold text-xl">Customer Feedback</h3>
             <div className="flex items-center">
-                {Array.from({ length: 5 }, (_, index) => (
+                {Array.from({length: 5}, (_, index) => (
                     <FiStar
                         key={index}
                         className={`${feedback.rating > index ? 'text-yellow-400' : 'text-gray-400'}`}
@@ -72,7 +73,11 @@ const FeedbackDisplay = ({ feedback, orderID }) => {
                 {isClient ? (
                     feedback.date.seconds
                         ? formatDate(feedback.date.seconds * 1000)
-                        : new Date(feedback.date).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                        : new Date(feedback.date).toLocaleDateString('en-GB', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        })
                 ) : ""}
             </p>
             <p className="text-gray-700">{feedback.comment}</p>
@@ -86,7 +91,11 @@ const FeedbackDisplay = ({ feedback, orderID }) => {
                             {isClient ? (
                                 response.date.seconds
                                     ? formatDate(response.date.seconds * 1000)
-                                    : new Date(response.date).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                                    : new Date(response.date).toLocaleDateString('en-GB', {
+                                        year: 'numeric',
+                                        month: '2-digit',
+                                        day: '2-digit'
+                                    })
                             ) : ""}
                         </p>
                     </div>

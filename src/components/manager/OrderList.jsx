@@ -1,8 +1,8 @@
 "use client"
 import '../../app/managerPortal/manager.css';
-import { useEffect, useState } from 'react';
-import { db } from "/src/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import {useEffect, useState} from 'react';
+import {db} from "/src/firebase";
+import {collection, getDocs} from "firebase/firestore";
 
 const OrderList = () => {
 
@@ -38,18 +38,21 @@ const OrderList = () => {
             {orders.map((order, index) => (
                 <div key={index}>
                     {/* Add more fields as necessary */}
-                    <div className="card max-w-xl mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5 group transition-all ease-in-out duration-200 transform group-hover:scale-105">
+                    <div
+                        className="card max-w-xl mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5 group transition-all ease-in-out duration-200 transform group-hover:scale-105">
                         <div className="flex">
                             <div className="p-8 w-full">
                                 <div className="flex justify-between">
-                                    <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{order.orderID}</div>
+                                    <div
+                                        className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{order.orderID}</div>
                                     <p className="tracking-wide text-sm text-white font-semibold rounded-md p-1 bg-indigo-500">{order.orderData.status}</p>
                                 </div>
                                 <div className="flex justify-between">
-                                    <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.date.seconds * 1000)}</p>{console.log()}
+                                    <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.date.seconds * 1000)}</p>
                                     <p className="block mt-1 text-lg leading-tight font-medium text-black">{order.orderData.price}$</p>
                                 </div>
-                                <div className="accordion opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <div
+                                    className="accordion opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                     <div className="flex justify-between border-b pb-2">
                                         <p className="mt-2 text-gray-500">Weight: {order.orderData.weigth} lbs</p>
                                         <p className="mt-2 text-gray-500">Discount: {order.orderData.discount}$</p>

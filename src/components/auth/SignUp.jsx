@@ -1,122 +1,124 @@
 'use client';
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import React, { useState } from "react";
-import { auth, db } from "/src/firebase";
+import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+import React, {useState} from "react";
+import {auth, db} from "/src/firebase";
 import Alert from "react-bootstrap/Alert";
-import { doc, setDoc } from "firebase/firestore";
+import {doc, setDoc} from "firebase/firestore";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("Customer");
-  const [username, setUsername] = useState("");
-  const [connectionStatus, setConnectionStatus] = useState(null);
-  const [errorMessage, setError] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [role, setRole] = useState("Customer");
+    const [username, setUsername] = useState("");
+    const [connectionStatus, setConnectionStatus] = useState(null);
+    const [errorMessage, setError] = useState("");
 
-  const signUp = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        // Add the user's role and name to Firebase Firestore
-        setDoc(doc(db, "users", user.uid), {
-          role: role,
-          email: email,
-        })
-          .then(() => {
-            console.log("User data added to Firestore");
-            setConnectionStatus("success");
-            // Update the displayName in Firebase Auth
-            updateProfile(user, { displayName: username })
-              .then(() => {
-                console.log("User's displayName updated in Firebase Auth");
-              })
-              .catch((error) => {
-                console.error("Error updating user's displayName in Firebase Auth: ", error);
-              });
-          })
-          .catch((error) => {
-            console.error("Error adding user data to Firestore: ", error);
-            setConnectionStatus("error");
-            setError("Firestore: " + error)
-          });
+    const signUp = (e) => {
+        e.preventDefault();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                // Add the user's role and name to Firebase Firestore
+                setDoc(doc(db, "users", user.uid), {
+                    role: role,
+                    email: email,
+                })
+                    .then(() => {
+                        console.log("User data added to Firestore");
+                        setConnectionStatus("success");
+                        // Update the displayName in Firebase Auth
+                        updateProfile(user, {displayName: username})
+                            .then(() => {
+                                console.log("User's displayName updated in Firebase Auth");
+                            })
+                            .catch((error) => {
+                                console.error("Error updating user's displayName in Firebase Auth: ", error);
+                            });
+                    })
+                    .catch((error) => {
+                        console.error("Error adding user data to Firestore: ", error);
+                        setConnectionStatus("error");
+                        setError("Firestore: " + error)
+                    });
 
-        window.localStorage.setItem('userUID', userCredential.user.uid);
-        window.localStorage.setItem('userRole', role);
+                window.localStorage.setItem('userUID', userCredential.user.uid);
+                window.localStorage.setItem('userRole', role);
 
-      })
-      .catch((error) => {
-        console.log(error);
-        setConnectionStatus("error");
-        setError(error.toString())
-      });
+            })
+            .catch((error) => {
+                console.log(error);
+                setConnectionStatus("error");
+                setError(error.toString())
+            });
 
-  }
-  return (
-    <div className="sign-in-container w-full h-full font-poppins z-[20]">
-      <form onSubmit={signUp}>
-        <div className="bg-grey-lighter min-h-screen flex flex-col">
-          <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-            <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-              <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+    }
+    return (
+        <div className="sign-in-container w-full h-full font-poppins z-[20]">
+            <form onSubmit={signUp}>
+                <div className="bg-grey-lighter min-h-screen flex flex-col">
+                    <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                        <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                            <h1 className="mb-8 text-3xl text-center">Sign up</h1>
 
-              {connectionStatus === "success" ?
-                <Alert variant="success">
-                  <Alert.Heading>
-                    <strong>Success! </strong> The account has been created.<br />You are logged in successfully.<br />
-                    <a href="/"><u>Click here</u></a> to go to the main page<br /><br />
-                  </Alert.Heading>
-                </Alert> : null}
-              {connectionStatus === "error" ?
-                <Alert variant="danger">
-                  <Alert.Heading>
-                    <strong>Error! </strong>{errorMessage}<br /><br />
-                  </Alert.Heading>
-                </Alert> : null}
-              <input
-                type="text"
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Name" />
+                            {connectionStatus === "success" ?
+                                <Alert variant="success">
+                                    <Alert.Heading>
+                                        <strong>Success! </strong> The account has been created.<br/>You are logged in
+                                        successfully.<br/>
+                                        <a href="/"><u>Click here</u></a> to go to the main page<br/><br/>
+                                    </Alert.Heading>
+                                </Alert> : null}
+                            {connectionStatus === "error" ?
+                                <Alert variant="danger">
+                                    <Alert.Heading>
+                                        <strong>Error! </strong>{errorMessage}<br/><br/>
+                                    </Alert.Heading>
+                                </Alert> : null}
+                            <input
+                                type="text"
+                                className="block border border-grey-light w-full p-3 rounded mb-4"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Name"/>
 
-              <input
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+                            <input
+                                className="block border border-grey-light w-full p-3 rounded mb-4"
+                                type="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
 
-              <input
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div>
-                <label>
-                  <select
-                    className="block border border-grey-light w-full p-3 rounded mb-4"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                  >
-                    <option defaultValue value="Customer">Customer</option>
-                    <option value="Courier">Courier</option>
-                  </select>
-                </label>
-              </div>
-              <button
-                type="submit"
-                className="w-full text-center py-3 rounded bg-blue-gradient text-white focus:outline-none my-1"
-              >Create Account</button>
-            </div>
-          </div>
+                            <input
+                                className="block border border-grey-light w-full p-3 rounded mb-4"
+                                type="password"
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <div>
+                                <label>
+                                    <select
+                                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                                        value={role}
+                                        onChange={(e) => setRole(e.target.value)}
+                                    >
+                                        <option defaultValue value="Customer">Customer</option>
+                                        <option value="Courier">Courier</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <button
+                                type="submit"
+                                className="w-full text-center py-3 rounded bg-blue-gradient text-white focus:outline-none my-1"
+                            >Create Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default SignUp;

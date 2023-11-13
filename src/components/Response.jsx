@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 
-const Response = ({ success, message }) => {
+const Response = ({success, message}) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {

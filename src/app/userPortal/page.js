@@ -1,12 +1,12 @@
 "use client"
 import '../managerPortal/manager.css';
 import styles from "/src/styles/style";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useRouter, redirect } from 'next/router'; // Assuming 'redirect' is imported from 'next/router'
-import { Navbar, FeedbackDisplay, FeedbackModal, Footer } from "@/components";
-import { useEffect, useState } from 'react';
-import { auth, db } from "/src/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {Navbar, FeedbackDisplay, FeedbackModal, Footer} from "@/components";
+import {useEffect, useState} from 'react';
+import {auth, db} from "/src/firebase";
+import {collection, getDocs, query, where} from "firebase/firestore";
+import {redirect} from "next/navigation";
 
 const Page = () => {
     const [user, loading] = useAuthState(auth);
@@ -22,15 +22,15 @@ const Page = () => {
         }
 
         if (user) {
-            setAuthUser(user); 
+            setAuthUser(user);
             const ordersRef = collection(db, 'orders');
-            const q = query(ordersRef, where("userUID", "==", user.uid)); 
+            const q = query(ordersRef, where("userUID", "==", user.uid));
 
             getDocs(q).then((querySnapshot) => {
                 const ordersData = [];
                 const reviewList = [];
                 const promptList = [];
-                const paidListTemp = []; 
+                const paidListTemp = [];
                 querySnapshot.forEach((doc) => {
                     let order = {
                         orderID: doc.id,
@@ -40,8 +40,8 @@ const Page = () => {
                 });
                 setOrders(ordersData);
                 ordersData.forEach(order => {
-                    reviewList.push(order.orderData.rating == "" || order.orderData.rating == null);
-                    paidListTemp.push(order.orderData.status == "paid");
+                    reviewList.push(order.orderData.rating === "" || order.orderData.rating == null);
+                    paidListTemp.push(order.orderData.status === "paid");
                     promptList.push(false);
                 });
                 setPaidList(paidListTemp);
@@ -76,7 +76,7 @@ const Page = () => {
         <div className="h-screen bg-primary overflow-y-scroll">
             <div className={`${styles.paddingX} ${styles.flexCenter}`}>
                 <div className={`${styles.boxWidth} z-[20]`}>
-                    <Navbar />
+                    <Navbar/>
                 </div>
             </div>
             <div className="h-full bg-primary">
@@ -84,20 +84,23 @@ const Page = () => {
                     <div key={index}>
                         {/* Add more fields as necessary */}
                         {promptReview[index] && (
-                            <FeedbackModal orderProp={order} onClose={() => handleModalClose(index)} />
+                            <FeedbackModal orderProp={order} onClose={() => handleModalClose(index)}/>
                         )}
-                        <div className="card max-w-xl mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5 group transition-all ease-in-out duration-200 transform group-hover:scale-105">
+                        <div
+                            className="card max-w-xl mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5 group transition-all ease-in-out duration-200 transform group-hover:scale-105">
                             <div className="flex">
                                 <div className="p-8 w-full">
                                     <div className="flex justify-between">
-                                        <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{order.orderID}</div>
+                                        <div
+                                            className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{order.orderID}</div>
                                         <p className="tracking-wide text-sm text-white font-semibold rounded-md p-1 bg-indigo-500">{order.orderData.status}</p>
                                     </div>
                                     <div className="flex justify-between">
-                                        <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.date.seconds * 1000)}</p>{console.log()}
+                                        <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.date.seconds * 1000)}</p>
                                         <p className="block mt-1 text-lg leading-tight font-medium text-black">{order.orderData.price}$</p>
                                     </div>
-                                    <div className="accordion opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <div
+                                        className="accordion opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                         <div className="flex justify-between border-b pb-2">
                                             <p className="mt-2 text-gray-500">Weight: {order.orderData.weigth} lbs</p>
                                             <p className="mt-2 text-gray-500">Discount: {order.orderData.discount}$</p>
@@ -115,7 +118,7 @@ const Page = () => {
                                                 Review Service
                                             </button>
                                         ) : (
-                                            <FeedbackDisplay feedback={order.orderData.rating} orderID={order.orderID} />
+                                            <FeedbackDisplay feedback={order.orderData.rating} orderID={order.orderID}/>
                                         ))}
 
                                         <p className="mt-2 text-gray-500 text-justify">{order.orderData.description}</p>
@@ -128,7 +131,7 @@ const Page = () => {
             </div>
             <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
                 <div className={`${styles.boxWidth}`}>
-                    <Footer />
+                    <Footer/>
                 </div>
             </div>
         </div>

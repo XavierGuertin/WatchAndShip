@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { collection, query, getDocs, updateDoc, doc } from 'firebase/firestore';
-import { db, auth } from "@/firebase";
-import { useRouter, useSearchParams } from "next/navigation";
+import React, {useEffect, useState} from 'react';
+import {collection, doc, getDocs, query, updateDoc} from 'firebase/firestore';
+import {db} from "@/firebase";
 import "/src/app/courierPortal/updateorderstatus.css";
 
 const UpdateOrderStatus = () => {
@@ -13,7 +12,7 @@ const UpdateOrderStatus = () => {
         const fetchOrders = async () => {
             const q = query(collection(db, "orders"));
             const querySnapshot = await getDocs(q);
-            const ordersData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            const ordersData = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
             setOrders(ordersData);
         };
 
@@ -23,7 +22,7 @@ const UpdateOrderStatus = () => {
     const updateStatus = async () => {
         if (selectedOrderId) {
             const docRef = doc(db, 'orders', selectedOrderId);
-            await updateDoc(docRef, { status: parseInt(newStatus) });
+            await updateDoc(docRef, {status: parseInt(newStatus)});
             alert(`Order ${selectedOrderId} updated to status ${newStatus}`);
         } else {
             alert('Please select an order');

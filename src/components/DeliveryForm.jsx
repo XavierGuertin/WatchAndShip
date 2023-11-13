@@ -1,11 +1,11 @@
 'use client';
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
+import {Autocomplete, useJsApiLoader} from "@react-google-maps/api";
 import button from "@/components/Button";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "@/firebase";
+import {addDoc, collection} from "firebase/firestore";
+import {db} from "@/firebase";
 
 const libraries = ["places"];
 
@@ -149,11 +149,11 @@ const DeliveryForm = () => {
                                 placeholder="Weight (Lbs)"
                             />
                             <DatePicker className="block border border-black w-full p-3 rounded mb-4"
-                                minDate={todayDate}
-                                selected={date}
-                                onChange={(date) => setDate(date)}
+                                        minDate={todayDate}
+                                        selected={date}
+                                        onChange={(date) => setDate(date)}
                             />
-                            <br />
+                            <br/>
                             <Autocomplete>
                                 <input
                                     className="block border border-black w-full p-3 rounded mb-4"
@@ -174,16 +174,16 @@ const DeliveryForm = () => {
                             </Autocomplete>
 
                             <textarea className="block border border-black w-full p-3 rounded mb-4"
-                                rows="4"
-                                cols="10"
-                                placeholder="Description"
-                                onChange={(e) => setDescription(e.target.value)}
+                                      rows="4"
+                                      cols="10"
+                                      placeholder="Description"
+                                      onChange={(e) => setDescription(e.target.value)}
                             >
                             </textarea>
 
                             <button type="button"
-                                className="w-full text-center py-3 rounded bg-blue-gradient text-black focus:outline-none my-1"
-                                onClick={calculateDistance}>
+                                    className="w-full text-center py-3 rounded bg-blue-gradient text-black focus:outline-none my-1"
+                                    onClick={calculateDistance}>
                                 Calculate Distance
                             </button>
 

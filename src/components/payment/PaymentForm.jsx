@@ -1,9 +1,9 @@
 'use client';
-import { addDoc, serverTimestamp, collection, doc, updateDoc } from "firebase/firestore";
-import { db, auth } from "@/firebase";
-import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useRouter, useSearchParams } from "next/navigation";
+import {addDoc, collection, doc, serverTimestamp, updateDoc} from "firebase/firestore";
+import {auth, db} from "@/firebase";
+import React, {useState} from "react";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {useRouter, useSearchParams} from "next/navigation";
 import Response from '../Response';
 
 const PaymentForm = () => {
@@ -61,7 +61,8 @@ const PaymentForm = () => {
             <div className="payment-form-container w-full h-max font-poppins z-[20]">
                 <form onSubmit={Pay}>
                     <div className="bg-grey-lighter min-h-screen flex flex-col">
-                        <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                        <div
+                            className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                             <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                                 <h1 className="mb-8 text-3xl text-center">Payment Portal</h1>
                                 <input
@@ -94,13 +95,15 @@ const PaymentForm = () => {
                                     type="submit"
                                     id="pay-button"
                                     className="w-full text-center py-3 rounded bg-blue-gradient text-white focus:outline-none my-1"
-                                >Submit</button>
+                                >Submit
+                                </button>
                             </div>
                         </div>
                     </div>
                 </form>
-                {paymentComplete ? <Response success={true} message={"Transaction Completed: Redirecting you Home"} onLoad={sendBackHome()} /> : <></>}
-            </div >
+                {paymentComplete ? <Response success={true} message={"Transaction Completed: Redirecting you Home"}
+                                             onLoad={sendBackHome()}/> : <></>}
+            </div>
         </>
     )
 }
