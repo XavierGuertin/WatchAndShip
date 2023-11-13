@@ -48,7 +48,7 @@ const OrderList = () => {
                                     <p className="tracking-wide text-sm text-white font-semibold rounded-md p-1 bg-indigo-500">{order.orderData.status}</p>
                                 </div>
                                 <div className="flex justify-between">
-                                    <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.date.seconds * 1000)}</p>
+                                    <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.deliveryDate.seconds * 1000)}</p>
                                     <p className="block mt-1 text-lg leading-tight font-medium text-black">{order.orderData.price}$</p>
                                 </div>
                                 <div

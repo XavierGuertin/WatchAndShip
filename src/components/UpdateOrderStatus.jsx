@@ -22,7 +22,7 @@ const UpdateOrderStatus = () => {
     const updateStatus = async () => {
         if (selectedOrderId) {
             const docRef = doc(db, 'orders', selectedOrderId);
-            await updateDoc(docRef, {status: parseInt(newStatus)});
+            await updateDoc(docRef, {status: newStatus});
             alert(`Order ${selectedOrderId} updated to status ${newStatus}`);
         } else {
             alert('Please select an order');
@@ -30,7 +30,7 @@ const UpdateOrderStatus = () => {
     };
 
     return (
-        <div className='update-order-status'>
+        <div className='update-order-status z-[20]'>
             <select value={selectedOrderId} onChange={(e) => setSelectedOrderId(e.target.value)}>
                 <option value="">Select an Order</option>
                 {orders.map(order => (
@@ -40,10 +40,9 @@ const UpdateOrderStatus = () => {
                 ))}
             </select>
             <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)}>
-                <option value="0">Processed</option>
-                <option value="1">Shipped</option>
-                <option value="2">En Route</option>
-                <option value="3">Arrived</option>
+                <option value="courier-assigned">Courier Assigned</option>
+                <option value="package-picked-up">Package Picked Up</option>
+                <option value="package-delivered">Package Delivered</option>
             </select>
             <button onClick={updateStatus}>Update Status</button>
         </div>

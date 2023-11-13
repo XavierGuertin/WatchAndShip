@@ -71,7 +71,7 @@ const DeliveryForm = () => {
                 price: amount,
                 rating: null,
                 status: "not-paid",
-                user: userUID,
+                userUID: userUID,
                 weight: weight,
             };
             const docRef = await addDoc(collection(db, "orders"), docData);
