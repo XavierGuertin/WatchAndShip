@@ -17,7 +17,7 @@ const Page = () => {
     const [paidList, setPaidList] = useState([]);
 
     useEffect(() => {
-        if (!loading && !user || !loading && window.localStorage.getItem('role') !== 'Customer' && window.localStorage.getItem('role') !== null) {
+        if (!loading && !user || !loading && window.localStorage.getItem('userRole') !== 'Customer' && window.localStorage.getItem('userRole') !== null) {
             redirect('/');
         }
 
@@ -41,7 +41,7 @@ const Page = () => {
                 setOrders(ordersData);
                 ordersData.forEach(order => {
                     reviewList.push(order.orderData.rating === "" || order.orderData.rating == null);
-                    paidListTemp.push(order.orderData.status === "paid");
+                    paidListTemp.push(order.orderData.status === "package-delivered");
                     promptList.push(false);
                 });
                 setPaidList(paidListTemp);
@@ -96,7 +96,7 @@ const Page = () => {
                                         <p className="tracking-wide text-sm text-white font-semibold rounded-md p-1 bg-indigo-500">{order.orderData.status}</p>
                                     </div>
                                     <div className="flex justify-between">
-                                        <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.date.seconds * 1000)}</p>
+                                        <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.deliveryDate.seconds * 1000)}</p>
                                         <p className="block mt-1 text-lg leading-tight font-medium text-black">{order.orderData.price}$</p>
                                     </div>
                                     <div

@@ -8,13 +8,14 @@ import {auth} from "/src/firebase";
 import OrderList from "@/components/manager/OrderList";
 import SupportList from "@/components/manager/SupportList";
 import {Footer} from '@/components';
+import {redirect} from "next/navigation";
 
 const Page = () => {
     const [user, loading] = useAuthState(auth);
     const [view, setView] = useState('OrderList');
 
     useEffect(() => {
-        if (!loading && !user || !loading && window.localStorage.getItem('role') !== 'Manager' && window.localStorage.getItem('role') !== null) {
+        if (!loading && !user || !loading && window.localStorage.getItem('userRole') !== 'Manager' && window.localStorage.getItem('userRole') !== null) {
             redirect('/')
         }
     }, [user, loading]);

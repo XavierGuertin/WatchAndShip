@@ -21,7 +21,7 @@ const FeedbackDisplay = ({feedback, orderID}) => {
 
     const handleReply = async () => {
         if (wordCount >= 10 && authUser) {
-            const newReply = {content: reply, date: new Date(), userID: authUser.uid, username: authUser.displayName};
+            const newReply = {content: reply, date: new Date(), userUID: authUser.uid, username: authUser.displayName};
             const orderDocRef = doc(db, 'orders', orderID);
 
             try {
