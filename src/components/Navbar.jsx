@@ -54,7 +54,7 @@ const Navbar = () => {
                 >
                     {authUser ? (
                         <>
-                            <a href={getPortalLink()} className="mr-10">{authUser.email}</a>
+                            <a href={getPortalLink()} className="mr-10">{authUser.displayName}</a>
                             <button onClick={userSignOut}>Sign Out</button>
                         </>
 
