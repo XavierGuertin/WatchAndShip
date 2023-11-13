@@ -1,11 +1,11 @@
 'use client';
-import { TrackingOrder } from "src/components";
+import {TrackingOrder} from "src/components";
 import "/src/app/login/auth.css";
 import styles from "/src/styles/style";
-import { Navbar, Footer } from "@/components";
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { auth } from "@/firebase";
+import {Footer, Navbar} from "@/components";
+import React, {useEffect} from "react";
+import {useRouter} from "next/navigation";
+import {auth} from "@/firebase";
 
 const Page = () => {
 
@@ -22,16 +22,17 @@ const Page = () => {
         <div className="App bg-primary">
             <div className={`${styles.paddingX} ${styles.flexCenter}`}>
                 <div className={`${styles.boxWidth} z-[20]`}>
-                    <Navbar />
+                    <Navbar/>
                 </div>
             </div>
             {/* gradient start */}
-            <div className="absolute z-[0] opacity-45 w-[60%] h-[60%] -bottom-[140%] top-0 -left-[10%] rounded-full blue__gradient" />
+            <div
+                className="absolute z-[0] opacity-45 w-[60%] h-[60%] -bottom-[140%] top-0 -left-[10%] rounded-full blue__gradient"/>
 
 
             {/* gradient end */}
             <div className="flex justify-between px-16">
-                <TrackingOrder />
+                <TrackingOrder/>
             </div>
             <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
                 <div className={`${styles.boxWidth}`}>
@@ -39,7 +40,7 @@ const Page = () => {
                 </div>
             </div>
         </div>
-        
+
     )
 }
 

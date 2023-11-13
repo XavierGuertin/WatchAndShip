@@ -1,5 +1,5 @@
 'use client';
-import { UpdateOrderStatus } from "src/components";
+import {UpdateOrderStatus} from "src/components";
 import styles from "/src/styles/style";
 import {Footer, Navbar} from "@/components";
 import {redirect} from "next/navigation";

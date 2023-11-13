@@ -44,3 +44,4 @@ next-env.d.ts
 *.sln
 *.sw?
 /.next
+/desktop.ini

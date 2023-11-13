@@ -1,6 +1,6 @@
 'use client';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import {signInWithEmailAndPassword} from "firebase/auth";
+import React, {useState} from "react";
 import {auth, db} from "/src/firebase";
 import Alert from 'react-bootstrap/Alert';
 import {doc, getDoc} from "firebase/firestore";
@@ -23,6 +23,7 @@ const SignIn = () => {
             return "notFound";
         }
     }
+
     const signIn = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
@@ -76,12 +77,13 @@ const SignIn = () => {
                             <button
                                 type="submit"
                                 className="w-full text-center py-3 rounded bg-blue-gradient text-white focus:outline-none my-1"
-                            >Log In</button>
+                            >Log In
+                            </button>
                         </div>
                     </div>
                 </div>
             </form>
-        </div >
+        </div>
     );
 };
 

@@ -18,7 +18,7 @@ import dynamic from 'next/dynamic';
 // Import FeedbackModal with SSR disabled
 const FeedbackModal = dynamic(() => import('./FeedbackModal'), {
     ssr: false,
-  });
+});
 
 export {
     Navbar,

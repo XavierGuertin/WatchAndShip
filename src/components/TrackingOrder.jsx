@@ -1,11 +1,6 @@
 'use client';
-import { addDoc, serverTimestamp, collection, doc, updateDoc } from "firebase/firestore";
-import { db, auth } from "@/firebase";
-import React, { useState, useEffect} from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useRouter, useSearchParams } from "next/navigation";
+import React, {useState} from "react";
 import "/src/app/ordertracking/TrackingOrder.css";
-
 
 
 const TrackingOrder = () => {
@@ -33,25 +28,25 @@ const TrackingOrder = () => {
             <h2>Order Number: {/*orderId*/}</h2>
             <div className="status-bar">
                 <div className="status">
-                <img src="/checklist.jpeg" alt="Processed" />
-                <span>Order Processed</span>
+                    <img src="/checklist.jpeg" alt="Processed"/>
+                    <span>Order Processed</span>
+                </div>
+                <div className="status">
+                    <img src="/box.jpeg" alt="Shipped"/>
+                    <span>Order Shipped</span>
+                </div>
+                <div className="status">
+                    <img src="/shipping.jpeg" alt="En Route"/>
+                    <span>Order En Route</span>
+                </div>
+                <div className="status">
+                    <img src="/home.jpeg" alt="Arrival"/>
+                    <span>Order Arrival</span>
+                </div>
             </div>
-            <div className="status">
-                <img src="/box.jpeg" alt="Shipped" />
-                <span>Order Shipped</span>
+            <div className="progress-bar">
+                <progress value={orderStatus} max="3"></progress>
             </div>
-            <div className="status">
-                <img src="/shipping.jpeg" alt="En Route" />
-                <span>Order En Route</span>
-            </div>
-            <div className="status">
-                <img src="/home.jpeg" alt="Arrival" />
-                <span>Order Arrival</span>
-            </div>
-        </div>
-        <div className="progress-bar">
-            <progress value={orderStatus} max="3"></progress>
-        </div>
         </div>
     );
 };

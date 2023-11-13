@@ -1,8 +1,8 @@
 "use client"
 import '../../app/managerPortal/manager.css';
-import { useEffect, useState } from 'react';
-import { db } from "/src/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import {useEffect, useState} from 'react';
+import {db} from "/src/firebase";
+import {collection, getDocs} from "firebase/firestore";
 
 const SupportList = () => {
 
