@@ -10,6 +10,8 @@ import SignUp from "./auth/SignUp.jsx";
 import FeedbackDisplay from "./FeedbackDisplay";
 import PaymentForm from "./payment/PaymentForm";
 import DeliveryForm from "@/components/DeliveryForm";
+import TrackingOrder from "./TrackingOrder";
+import UpdateOrderStatus from "./UpdateOrderStatus";
 
 import dynamic from 'next/dynamic';
 
@@ -31,5 +33,7 @@ export {
     FeedbackModal,
     FeedbackDisplay,
     PaymentForm,
-    DeliveryForm
+    DeliveryForm,
+    TrackingOrder,
+    UpdateOrderStatus
 };
