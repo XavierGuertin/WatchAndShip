@@ -1,6 +1,5 @@
 'use client';
 import { PaymentForm, Navbar } from "src/components";
-import "/src/app/login/auth.css";
 import styles from "src/styles/style";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
