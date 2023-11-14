@@ -9,7 +9,7 @@ import SignIn from "./auth/SignIn.jsx";
 import SignUp from "./auth/SignUp.jsx";
 import FeedbackDisplay from "./FeedbackDisplay";
 import PaymentForm from "./payment/PaymentForm";
-import DeliveryForm from "@/components/DeliveryForm";
+import DeliveryForm from "./DeliveryForm";
 import TrackingOrder from "./TrackingOrder";
 import UpdateOrderStatus from "./UpdateOrderStatus";
 

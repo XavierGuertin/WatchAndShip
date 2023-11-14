@@ -1,13 +1,12 @@
 'use client';
-import {PaymentForm} from "src/components";
+import { PaymentForm, Navbar } from "src/components";
 import "/src/app/login/auth.css";
-import styles from "/src/styles/style";
-import {Navbar} from "@/components";
+import styles from "src/styles/style";
 import React, {useEffect} from "react";
 import {useRouter} from "next/navigation";
-import {auth} from "@/firebase";
+import {auth} from "src/firebase";
 
-const Page = () => {
+function Page( { params } ) {
 
     const router = useRouter();
 
@@ -32,7 +31,7 @@ const Page = () => {
 
             {/* gradient end */}
             <div className="flex justify-between px-16">
-                <PaymentForm/>
+                <PaymentForm orderId={params.orderId}/>
             </div>
         </div>
     )

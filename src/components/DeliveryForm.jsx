@@ -3,9 +3,8 @@ import React, {useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import {Autocomplete, useJsApiLoader} from "@react-google-maps/api";
-import button from "@/components/Button";
 import {addDoc, collection} from "firebase/firestore";
-import {db} from "@/firebase";
+import {db} from "src/firebase";
 
 const libraries = ["places"];
 
@@ -77,7 +76,7 @@ const DeliveryForm = () => {
             const docRef = await addDoc(collection(db, "orders"), docData);
 
             //Redirect to payment page
-            window.location.href = "/payment?orderID=" + docRef.id;
+            window.location.href = "/payment/" + docRef.id;
 
         } //else go back to form
     };

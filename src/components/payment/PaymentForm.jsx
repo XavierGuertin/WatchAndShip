@@ -1,26 +1,36 @@
 'use client';
-import {addDoc, collection, doc, serverTimestamp, updateDoc} from "firebase/firestore";
-import {auth, db} from "@/firebase";
-import React, {useState} from "react";
-import {useAuthState} from "react-firebase-hooks/auth";
-import {useRouter, useSearchParams} from "next/navigation";
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { auth, db } from "src/firebase";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/navigation";
 import Response from '../Response';
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
-const PaymentForm = () => {
+const PaymentForm = props => {
     const [paymentComplete, setPaymentComplete] = useState(false);
     const [cardNumber, setCardNumber] = useState("");
-    const [expDate, setExpDate] = useState("");
+    const [expDate, setExpDate] = useState(null);
     const [cvc, setCvc] = useState("");
+    const [price, setPrice] = useState("");
     const [user] = useAuthState(auth);
-
-    const searchParams = useSearchParams();
-    const orderId = searchParams.get('orderID');
+    const todayDate = new Date();
 
     const router = useRouter();
 
+    useEffect(() => {
+        const getPrice = async () => {
+            const orderDocRef = doc(db, "orders", props.orderId);
+            const docSnap = await getDoc(orderDocRef);
+            setPrice(docSnap.get("price"));
+        }
+        getPrice();
+    }, [])
+
     // Function to change status of order once the user paid
     const changeStatus = async () => {
-        const orderDocRef = doc(db, "orders", orderId);
+        const orderDocRef = doc(db, "orders", props.orderId);
         await updateDoc(orderDocRef, {
             status: "paid"
         })
@@ -33,7 +43,7 @@ const PaymentForm = () => {
 
             changeStatus();
 
-            const orderDocRef = doc(db, "orders", orderId);
+            const orderDocRef = doc(db, "orders", props.orderId);
             const userDocRef = doc(db, "users", user.uid);
 
             await addDoc(collection(db, "transactions"), {
@@ -61,10 +71,13 @@ const PaymentForm = () => {
             <div className="payment-form-container w-full h-max font-poppins z-[20]">
                 <form onSubmit={Pay}>
                     <div className="bg-grey-lighter min-h-screen flex flex-col">
-                        <div
-                            className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                        <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                             <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                                 <h1 className="mb-8 text-3xl text-center">Payment Portal</h1>
+                                <div className="mb-8 flex justify-between">
+                                    <h1 className="text-2xl text-left">Total</h1>
+                                    <h1 className="text-2xl text-right">{price} $</h1>
+                                </div>
                                 <input
                                     className="block border border-grey-light w-full p-3 rounded mb-4"
                                     type="cardNumber"
@@ -74,13 +87,14 @@ const PaymentForm = () => {
                                     required={true}
                                     onChange={(e) => setCardNumber(e.target.value)}
                                 />
-                                <input
-                                    className="block border border-grey-light w-full p-3 rounded mb-4"
-                                    type="expDate"
-                                    placeholder="MM/YY"
-                                    value={expDate}
+                                <DatePicker className="block border border-grey-light w-full p-3 rounded mb-4"
+                                    minDate={todayDate}
+                                    selected={expDate}
+                                    placeholderText="MM/YY"
+                                    dateFormat="MM/yy"
+                                    showMonthYearPicker
+                                    onChange={(date) => setExpDate(date)}
                                     required={true}
-                                    onChange={(e) => setExpDate(e.target.value)}
                                 />
                                 <input
                                     className="block border border-grey-light w-full p-3 rounded mb-4"
@@ -102,7 +116,7 @@ const PaymentForm = () => {
                     </div>
                 </form>
                 {paymentComplete ? <Response success={true} message={"Transaction Completed: Redirecting you Home"}
-                                             onLoad={sendBackHome()}/> : <></>}
+                    onLoad={sendBackHome()} /> : <></>}
             </div>
         </>
     )
