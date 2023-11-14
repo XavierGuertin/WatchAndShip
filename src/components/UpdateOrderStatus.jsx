@@ -6,7 +6,7 @@ import "/src/app/courierPortal/updateorderstatus.css";
 const UpdateOrderStatus = () => {
     const [orders, setOrders] = useState([]);
     const [selectedOrderId, setSelectedOrderId] = useState('');
-    const [newStatus, setNewStatus] = useState(0);
+    const [newStatus, setNewStatus] = useState("");
 
     useEffect(() => {
         const fetchOrders = async () => {

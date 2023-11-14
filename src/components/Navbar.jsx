@@ -27,7 +27,7 @@ const Navbar = () => {
             return "/userPortal"
         } else if (window.localStorage.getItem('userRole') === 'Courier') {
             return "/courierPortal"
-        } else if (window.localStorage.getItem('userRole') === 'Admin') {
+        } else if (window.localStorage.getItem('userRole') === 'Manager') {
             return "/managerPortal"
         } else {
             return "/issue"
