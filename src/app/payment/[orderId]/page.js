@@ -2,11 +2,11 @@
 import { PaymentForm, Navbar } from "src/components";
 import "/src/app/login/auth.css";
 import styles from "src/styles/style";
-import React, {useEffect} from "react";
-import {useRouter} from "next/navigation";
-import {auth} from "src/firebase";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { auth } from "src/firebase";
 
-function Page( { params } ) {
+function Page({ params }) {
 
     const router = useRouter();
 
@@ -21,17 +21,17 @@ function Page( { params } ) {
         <div className="App bg-primary">
             <div className={`${styles.paddingX} ${styles.flexCenter}`}>
                 <div className={`${styles.boxWidth} z-[20]`}>
-                    <Navbar/>
+                    <Navbar />
                 </div>
             </div>
             {/* gradient start */}
             <div
-                className="absolute z-[0] opacity-45 w-[60%] h-[60%] -bottom-[140%] top-0 -left-[10%] rounded-full blue__gradient"/>
+                className="absolute z-[0] opacity-45 w-[60%] h-[60%] -bottom-[140%] top-0 -left-[10%] rounded-full blue__gradient" />
 
 
             {/* gradient end */}
             <div className="flex justify-between px-16">
-                <PaymentForm orderId={params.orderId}/>
+                <PaymentForm orderId={params.orderId} />
             </div>
         </div>
     )
