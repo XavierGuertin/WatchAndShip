@@ -27,25 +27,23 @@ const Page = () => {
 
     return (
         <>
+            <div className="h-screen bg-primary overflow-y-scroll">
             <div
                 className="absolute z-[0] opacity-70 w-[60%] h-[80%] -bottom-[140%] top-0 content-center rounded-full blue__gradient"/>
             <div
                 className="absolute z-[0] opacity-70 w-[60%] h-[80%] -bottom-[190%] top-80 right-10 rounded-full blue__gradient"/>
-            <div className="h-screen bg-primary overflow-y-scroll">
                 <div className={`${styles.paddingX} ${styles.flexCenter}`}>
                     <div className={`${styles.boxWidth} z-[20]`}>
                         <Navbar/>
                     </div>
                 </div>
-                <div className="text-center ">
+                <div className="text-center z-10 relative">
                     <button onClick={() => handleClick('OrderList')}
-                            className={`mx-auto rounded-l-xl text-${view === "OrderList" ? 'white' : 'black'} shadow-md m-5 p-2 bg-${view === "OrderList" ? 'indigo-500' : 'white'}`}>Order
-                        lists
+                        className={`mx-auto rounded-l-xl text-${view === "OrderList" ? 'white' : 'black'} shadow-md m-5 p-2 bg-${view === "OrderList" ? 'indigo-500' : 'white'} z-20`}>Order lists
                     </button>
                     <button onClick={() => handleClick('SupportList')}
-                            className={`mx-auto rounded-r-xl shadow-md m-5 p-2 text-${view === "SupportList" ? 'white' : 'black'}  bg-${view === "SupportList" ? 'indigo-500' : 'white'}`}>Support
+                        className={`mx-auto rounded-r-xl shadow-md m-5 p-2 text-${view === "SupportList" ? 'white' : 'black'}  bg-${view === "SupportList" ? 'indigo-500' : 'white'} z-20`}>Support
                     </button>
-
                 </div>
                 {view === 'OrderList' && <OrderList/>}
                 {view === 'SupportList' && <SupportList/>}
