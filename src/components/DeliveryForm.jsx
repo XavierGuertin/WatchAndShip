@@ -13,6 +13,7 @@ const DeliveryForm = () => {
     const [weight, setWeight] = useState("");
     const todayDate = new Date();
     const [date, setDate] = useState(new Date());
+    const [amount, setAmount] = useState(0);
     const [distance, setDistance] = useState("");
     const [description, setDescription] = useState("");
 
@@ -39,7 +40,7 @@ const DeliveryForm = () => {
 
     if (!isLoaded) return null;
 
-    async function calculateDistance() {
+    async function calculateDistanceAndAmount() {
         if (pickupRef.current.value !== "" && deliveryRef.current.value !== "") {
             const distanceGoogle = new google.maps.DirectionsService();
 
@@ -49,6 +50,7 @@ const DeliveryForm = () => {
                 travelMode: google.maps.TravelMode.DRIVING,
             });
 
+            setAmount(calculateDeliveryFee(weight, distance, date));
             setDistance(Math.round(results.routes[0].legs[0].distance.value / 1000));
         }
     }
@@ -56,8 +58,7 @@ const DeliveryForm = () => {
     const getQuote = async (e) => {
         e.preventDefault();
 
-        const amount = calculateDeliveryFee(weight, distance, date);
-        if (window.confirm(`The quote has been created successfully!\nThe amount is ${amount} $. Do you want to proceed to payment?`)) {
+        if (window.confirm(`Are you sure you want to proceed with the quote? You'll be redirected to the payment page.`)) {
             //Add the order to the firestore and set the status to not-paid
             const docData = {
                 courier: null,
@@ -70,7 +71,7 @@ const DeliveryForm = () => {
                 price: amount,
                 rating: null,
                 status: "not-paid",
-                user: userUID,
+                userUID: userUID,
                 weight: weight,
             };
             const docRef = await addDoc(collection(db, "orders"), docData);
@@ -182,14 +183,22 @@ const DeliveryForm = () => {
 
                             <button type="button"
                                     className="w-full text-center py-3 rounded bg-blue-gradient text-black focus:outline-none my-1"
-                                    onClick={calculateDistance}>
-                                Calculate Distance
+                                    onClick={calculateDistanceAndAmount}>
+                                Calculate Quote
                             </button>
 
                             <div>
                                 <p>
                                     <strong>
-                                        {distance !== "" ? "Distance is " + distance + " km" : null}
+                                        {distance !== "" ? "\nDistance is " + distance + " km\n" : null}
+                                    </strong>
+                                </p>
+                            </div>
+
+                            <div>
+                                <p>
+                                    <strong>
+                                        {amount !== 0 ? "\nThe quote amount is " + amount + " $\n" : null}
                                     </strong>
                                 </p>
                             </div>
@@ -198,7 +207,7 @@ const DeliveryForm = () => {
                                 <button
                                     type="submit"
                                     className="w-full text-center py-3 rounded bg-blue-gradient text-black focus:outline-none my-1">
-                                    Create quote
+                                    Confirm Quote & Pay
                                 </button>
                                 : null}
                         </div>
