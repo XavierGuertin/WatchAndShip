@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {signOut} from "firebase/auth";
 import {auth} from "/src/firebase";
-import {navLinks} from "@/constants";
+import {navLinks} from "src/constants";
 
 const Navbar = () => {
     const [active, setActive] = useState("Home");

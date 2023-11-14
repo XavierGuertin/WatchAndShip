@@ -1,7 +1,7 @@
 'use client';
 import React from "react";
 import {useAuthState} from "react-firebase-hooks/auth";
-import {auth} from "@/firebase";
+import {auth} from "src/firebase";
 
 const Button = ({styles}) => {
     const [user] = useAuthState(auth);

@@ -1,4 +1,4 @@
-import {numbers} from "@/constants";
+import {numbers} from "src/constants";
 import styles from "/src/styles/style";
 
 const Numbers = () => (

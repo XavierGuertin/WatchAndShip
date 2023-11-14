@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {collection, doc, getDocs, query, updateDoc} from 'firebase/firestore';
-import {db} from "@/firebase";
+import {db} from "src/firebase";
 import "/src/app/courierPortal/updateorderstatus.css";
 
 const UpdateOrderStatus = () => {

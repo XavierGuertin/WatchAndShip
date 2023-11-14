@@ -1,6 +1,6 @@
 'use client';
 import styles from "/src/styles/style";
-import {footerLinks, socialMedia} from "@/constants";
+import {footerLinks, socialMedia} from "src/constants";
 
 const Footer = () => (
     <section id="contact" className={`${styles.flexCenter} ${styles.paddingY} flex-col`}>
