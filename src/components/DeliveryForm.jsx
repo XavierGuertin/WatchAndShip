@@ -61,7 +61,8 @@ const DeliveryForm = () => {
         if (window.confirm(`Are you sure you want to proceed with the quote? You'll be redirected to the payment page.`)) {
             //Add the order to the firestore and set the status to not-paid
             const docData = {
-                courier: null,
+                courierUID: null,
+                courierName: null,
                 deliveryDate: date,
                 description: description,
                 discount: null,
@@ -73,6 +74,7 @@ const DeliveryForm = () => {
                 status: "not-paid",
                 userUID: userUID,
                 weight: weight,
+                customerUsername: window.localStorage.getItem('username')
             };
             const docRef = await addDoc(collection(db, "orders"), docData);
 

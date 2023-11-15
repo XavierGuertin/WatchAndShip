@@ -24,14 +24,14 @@
 }
 
 .status img {
-    width: 35px; /* Adjust as needed */
-    height: 35px; /* Adjust as needed */
+    width: 45px;
+    height: 45px;
     margin-bottom: 10px;
 }
 
 .progress-bar {
     width: 100%;
-    height: 30px; /* Increased height for better visibility */
+    height: 30px;
     background-color: #e0e0e0;
     border-radius: 15px;
     overflow: hidden;

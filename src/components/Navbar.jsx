@@ -1,5 +1,4 @@
-'use client';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {signOut} from "firebase/auth";
 import {auth} from "/src/firebase";
@@ -9,6 +8,7 @@ const Navbar = () => {
     const [active, setActive] = useState("Home");
     const [toggle, setToggle] = useState(false);
     const [authUser] = useAuthState(auth);
+    const [username, setUsername] = useState("");
     const loginTitle = 'Log In';
 
     const userSignOut = () => {
@@ -17,10 +17,19 @@ const Navbar = () => {
                 console.log("sign out successful");
                 window.localStorage.setItem('userUID', null);
                 window.localStorage.setItem('userRole', null);
-
+                window.localStorage.setItem('username', "Portal");
             })
             .catch((error) => console.log(error));
     };
+
+    useEffect(() => {
+        const username = async () => {
+            const username = window.localStorage.getItem('username');
+            setUsername(username);
+        };
+
+        username();
+    }, []);
 
     function getPortalLink() {
         if (window.localStorage.getItem('userRole') === 'Customer') {
@@ -54,7 +63,7 @@ const Navbar = () => {
                 >
                     {authUser ? (
                         <>
-                            <a href={getPortalLink()} className="mr-10">{authUser.email.split('@')[0]}</a>
+                            <a href={getPortalLink()} className="mr-10">{username}</a>
                             <button onClick={userSignOut}>Sign Out</button>
                         </>
 

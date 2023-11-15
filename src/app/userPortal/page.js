@@ -112,7 +112,15 @@ const Page = () => {
                                         <p className="mt-2 text-gray-500">Distance: {order.orderData.distance} km</p>
 
                                         <p className="mt-2 text-gray-500 text-justify">Description: {order.orderData.description}</p>
+
+                                        {order.orderData.courierName !== null ?
+                                            <p className="mt-2 text-gray-500 text-justify">Courier
+                                                Assigned: {order.orderData.courierName}</p>
+                                            :
+                                            null
+                                        }
                                         <div key={index}>
+                                            <br/>
                                             <TrackingOrder order={order} />
                                         </div>
                                         {paidList[index] && (reviews[index] ? (
