@@ -1,5 +1,5 @@
 .tracking-container {
-    width: 1000px; /* Increased width */
+    width: auto; /* Increased width */
     margin: auto;
     padding: 50px;
     border: 1px solid #ddd;
@@ -20,11 +20,12 @@
     flex-direction: column;
     align-items: center;
     flex: 1;
+    font-size: 12px;
 }
 
 .status img {
-    width: 50px; /* Adjust as needed */
-    height: 50px; /* Adjust as needed */
+    width: 35px; /* Adjust as needed */
+    height: 35px; /* Adjust as needed */
     margin-bottom: 10px;
 }
 

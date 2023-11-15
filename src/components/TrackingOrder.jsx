@@ -1,51 +1,39 @@
+// TrackingOrder.js
 'use client';
-import React, {useState} from "react";
-import "/src/app/ordertracking/TrackingOrder.css";
+import React from 'react';
+import "/src/app/userPortal/TrackingOrder.css";
 
+const TrackingOrder = ({ order }) => {
+    const statusToValue = {
+        "paid": 0.38,
+        "courier-assigned": 1.1285,
+        "package-picked-up": 1.88,
+        "package-delivered": 3
+    };
 
-const TrackingOrder = () => {
-    const [orderStatus, setOrderStatus] = useState(1.4); // 0: Processed, 1: Shipped, 2: En Route, 3: Arrival
+    const statusValue = statusToValue[order.orderData.status] || 0;
 
-    // useEffect(() => {
-    //     // Fetch order status from Firebase
-    //     const fetchOrderStatus = async () => {
-    //         const docRef = doc(db, 'orders', orderId);
-    //         const docSnap = await getDoc(docRef);
-
-    //         if (docSnap.exists()) {
-    //             setOrderStatus(docSnap.data().status);
-    //         } else {
-    //             console.log('No such document!');
-    //         }
-    //     };
-
-    //     fetchOrderStatus();
-    // }, [orderId]);
-
+    const statusLabels = [
+        { label: "Order Processed", imgSrc: "/checklist.jpeg", minStatus: 0 },
+        { label: "Courier Assigned", imgSrc: "/box.jpeg", minStatus: 0.8 },
+        { label: "Package Picked Up", imgSrc: "/shipping.jpeg", minStatus: 1.5 },
+        { label: "Package Delivered", imgSrc: "/home.jpeg", minStatus: 2.1 }
+    ];
 
     return (
         <div className="tracking-container">
-            <h2>Order Number: {/*orderId*/}</h2>
             <div className="status-bar">
-                <div className="status">
-                    <img src="/checklist.jpeg" alt="Processed"/>
-                    <span>Order Processed</span>
-                </div>
-                <div className="status">
-                    <img src="/box.jpeg" alt="Shipped"/>
-                    <span>Order Shipped</span>
-                </div>
-                <div className="status">
-                    <img src="/shipping.jpeg" alt="En Route"/>
-                    <span>Order En Route</span>
-                </div>
-                <div className="status">
-                    <img src="/home.jpeg" alt="Arrival"/>
-                    <span>Order Arrival</span>
-                </div>
+                {statusLabels.map((status, index) => (
+                    <div className={`status ${statusValue >= status.minStatus ? 'active' : ''}`} key={index}>
+                        <img src={status.imgSrc} alt={status.label} />
+                        <div className="status-label">
+                            <span>{status.label}</span>
+                        </div>
+                    </div>
+                ))}
             </div>
             <div className="progress-bar">
-                <progress value={orderStatus} max="3"></progress>
+                <progress value={statusValue} max="3"></progress>
             </div>
         </div>
     );

@@ -7,6 +7,7 @@ import {useEffect, useState} from 'react';
 import {auth, db} from "/src/firebase";
 import {collection, getDocs, query, where} from "firebase/firestore";
 import {redirect} from "next/navigation";
+import {TrackingOrder} from "src/components";
 
 const Page = () => {
     const [user, loading] = useAuthState(auth);
@@ -102,7 +103,7 @@ const Page = () => {
                                     <div
                                         className="accordion opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                         <div className="flex justify-between border-b pb-2">
-                                            <p className="mt-2 text-gray-500">Weight: {order.orderData.weigth} lbs</p>
+                                            <p className="mt-2 text-gray-500">Weight: {order.orderData.weight} lbs</p>
                                             <p className="mt-2 text-gray-500">Discount: {order.orderData.discount}$</p>
                                         </div>
 
@@ -110,6 +111,10 @@ const Page = () => {
                                         <p className="mt-2 text-gray-500">To: {order.orderData.pointB}</p>
                                         <p className="mt-2 text-gray-500">Distance: {order.orderData.distance} km</p>
 
+                                        <p className="mt-2 text-gray-500 text-justify">Description: {order.orderData.description}</p>
+                                        <div key={index}>
+                                            <TrackingOrder order={order} />
+                                        </div>
                                         {paidList[index] && (reviews[index] ? (
                                             <button
                                                 className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-2"
@@ -120,8 +125,6 @@ const Page = () => {
                                         ) : (
                                             <FeedbackDisplay feedback={order.orderData.rating} orderID={order.orderID}/>
                                         ))}
-
-                                        <p className="mt-2 text-gray-500 text-justify">{order.orderData.description}</p>
                                     </div>
                                 </div>
                             </div>
