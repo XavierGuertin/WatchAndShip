@@ -10,7 +10,7 @@ const Page = () => {
     const [user, loading] = useAuthState(auth);
 
     useEffect(() => {
-        if (!loading && !user) {
+        if (!loading && !user || !loading && window.localStorage.getItem('userRole') !== 'Customer' && window.localStorage.getItem('userRole') !== null) {
             redirect('/')
         }
     }, [user, loading]);

@@ -24,6 +24,21 @@ const SignIn = () => {
         }
     }
 
+    async function returnUsername(uid) {
+        const docRef = doc(db, "users", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            return docSnap.data().username;
+        } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+            return "notFound";
+        }
+    }
+
+
     const signIn = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
@@ -31,6 +46,7 @@ const SignIn = () => {
                 console.log(userCredential);
                 window.localStorage.setItem('userUID', userCredential.user.uid);
                 window.localStorage.setItem('userRole', await returnRole(userCredential.user.uid));
+                window.localStorage.setItem('username', await returnUsername(userCredential.user.uid));
                 setConnectionStatus("success");
             })
             .catch((error) => {

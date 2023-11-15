@@ -14,10 +14,10 @@ const TrackingOrder = ({ order }) => {
     const statusValue = statusToValue[order.orderData.status] || 0;
 
     const statusLabels = [
-        { label: "Order Processed", imgSrc: "/checklist.jpeg", minStatus: 0 },
-        { label: "Courier Assigned", imgSrc: "/box.jpeg", minStatus: 0.8 },
-        { label: "Package Picked Up", imgSrc: "/shipping.jpeg", minStatus: 1.5 },
-        { label: "Package Delivered", imgSrc: "/home.jpeg", minStatus: 2.1 }
+        {label: "Order Processed", imgSrc: "/checklist.png", minStatus: 0},
+        {label: "Courier Assigned", imgSrc: "/assigned.png", minStatus: 0.8},
+        {label: "Package Picked Up", imgSrc: "/shipping.png", minStatus: 1.5},
+        {label: "Package Delivered", imgSrc: "/home.png", minStatus: 2.1}
     ];
 
     return (
@@ -25,7 +25,7 @@ const TrackingOrder = ({ order }) => {
             <div className="status-bar">
                 {statusLabels.map((status, index) => (
                     <div className={`status ${statusValue >= status.minStatus ? 'active' : ''}`} key={index}>
-                        <img src={status.imgSrc} alt={status.label} />
+                        <img src={status.imgSrc} alt={status.label}/>
                         <div className="status-label">
                             <span>{status.label}</span>
                         </div>

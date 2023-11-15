@@ -1,5 +1,5 @@
 'use client';
-import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+import {createUserWithEmailAndPassword} from "firebase/auth";
 import React, {useState} from "react";
 import {auth, db} from "/src/firebase";
 import Alert from "react-bootstrap/Alert";
@@ -22,18 +22,11 @@ const SignUp = () => {
                 setDoc(doc(db, "users", user.uid), {
                     role: role,
                     email: email,
+                    username: username
                 })
                     .then(() => {
                         console.log("User data added to Firestore");
                         setConnectionStatus("success");
-                        // Update the displayName in Firebase Auth
-                        updateProfile(user, {displayName: username})
-                            .then(() => {
-                                console.log("User's displayName updated in Firebase Auth");
-                            })
-                            .catch((error) => {
-                                console.error("Error updating user's displayName in Firebase Auth: ", error);
-                            });
                     })
                     .catch((error) => {
                         console.error("Error adding user data to Firestore: ", error);
@@ -43,6 +36,7 @@ const SignUp = () => {
 
                 window.localStorage.setItem('userUID', userCredential.user.uid);
                 window.localStorage.setItem('userRole', role);
+                window.localStorage.setItem('username', username);
 
             })
             .catch((error) => {

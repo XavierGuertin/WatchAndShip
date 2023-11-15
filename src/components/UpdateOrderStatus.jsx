@@ -6,7 +6,7 @@ import "/src/app/courierPortal/updateorderstatus.css";
 const UpdateOrderStatus = () => {
     const [orders, setOrders] = useState([]);
     const [selectedOrderId, setSelectedOrderId] = useState('');
-    const [newStatus, setNewStatus] = useState("");
+    const [newStatus, setNewStatus] = useState("courier-assigned");
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -23,6 +23,10 @@ const UpdateOrderStatus = () => {
         if (selectedOrderId) {
             const docRef = doc(db, 'orders', selectedOrderId);
             await updateDoc(docRef, {status: newStatus});
+            if (newStatus === 'courier-assigned') {
+                await updateDoc(docRef, {courierUID: window.localStorage.getItem('userUID')});
+                await updateDoc(docRef, {courierName: window.localStorage.getItem('username')});
+            }
             alert(`Order ${selectedOrderId} updated to status ${newStatus}`);
         } else {
             alert('Please select an order');
@@ -35,7 +39,7 @@ const UpdateOrderStatus = () => {
                 <option value="">Select an Order</option>
                 {orders.map(order => (
                     <option key={order.id} value={order.id}>
-                        {order.id} - {order.customerName} {/* Displaying order ID and customer name */}
+                        {order.id} - {order.customerUsername} {/* Displaying order ID and customer name */}
                     </option>
                 ))}
             </select>
