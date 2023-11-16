@@ -59,7 +59,7 @@ const SignUp = () => {
                                     <Alert.Heading>
                                         <strong>Success! </strong> The account has been created.<br/>You are logged in
                                         successfully.<br/>
-                                        <a href="/"><u>Click here</u></a> to go to the main page<br/><br/>
+                                        You will be redirected to the main page.<br/><br/><br/>
                                     </Alert.Heading>
                                 </Alert> : null}
                             {connectionStatus === "error" ?
