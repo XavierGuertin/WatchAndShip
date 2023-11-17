@@ -73,6 +73,11 @@ const Page = () => {
         return `${day}/${month}/${year}`;
     }
 
+    const payQuote = (orderID) => (e) => {
+        e.preventDefault();
+        window.location.href = "/payment/" + orderID;
+    };
+
     return (
         <div className="h-screen bg-primary overflow-y-scroll">
             <div className={`${styles.paddingX} ${styles.flexCenter}`}>
@@ -100,11 +105,22 @@ const Page = () => {
                                         <p className="block mt-1 text-lg leading-tight font-medium text-black">{formatDate(order.orderData.deliveryDate.seconds * 1000)}</p>
                                         <p className="block mt-1 text-lg leading-tight font-medium text-black">{order.orderData.price}$</p>
                                     </div>
+                                    <div className="flex justify-left">
+                                        {order.orderData.status === "not-paid" ?
+                                            <button onClick={payQuote(order.orderID)}>
+                                                <br/><p
+                                                className="tracking-wide text-sm text-white font-semibold rounded-md p-1 bg-indigo-500">Pay
+                                                Now</p>
+                                            </button>
+                                            :
+                                            null
+                                        }
+                                    </div>
                                     <div
                                         className="accordion opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                         <div className="flex justify-between border-b pb-2">
                                             <p className="mt-2 text-gray-500">Weight: {order.orderData.weight} lbs</p>
-                                            <p className="mt-2 text-gray-500">Discount: {order.orderData.discount}$</p>
+                                            <p className="mt-2 text-gray-500">Discount: {order.orderData.discount === null ? 0 : order.orderData.discount}$</p>
                                         </div>
 
                                         <p className="mt-2 text-gray-500">From: {order.orderData.pointA}</p>
@@ -119,10 +135,14 @@ const Page = () => {
                                             :
                                             null
                                         }
-                                        <div key={index}>
-                                            <br/>
-                                            <TrackingOrder order={order} />
-                                        </div>
+
+                                        {reviews[index] ? (
+                                            <div key={index}>
+                                                <br/>
+                                                <TrackingOrder order={order}/>
+                                            </div>
+                                        ) : null}
+
                                         {paidList[index] && (reviews[index] ? (
                                             <button
                                                 className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-2"

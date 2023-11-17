@@ -26,13 +26,15 @@ const Page = () => {
                 </div>
             </div>
             <div
-                className="absolute z-[0] opacity-70 w-[60%] h-[80%] -bottom-[140%] top-0 content-center rounded-full blue__gradient"/>
-            <div
-                className="absolute z-[0] opacity-70 w-[60%] h-[80%] -bottom-[190%] top-80 right-10 rounded-full blue__gradient"/>
+                className="absolute z-[0] opacity-70 w-[60%] h-[80%] -bottom-[120%] top-0 content-center rounded-full blue__gradient"/>
 
+            <br/>
+            <br/>
             <div className="flex justify-between px-16">
                 {<UpdateOrderStatus/>}
             </div>
+
+            <br/>
 
             <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
                 <div className={`${styles.boxWidth}`}>
@@ -40,6 +42,7 @@ const Page = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 export default Page;

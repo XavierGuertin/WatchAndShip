@@ -6,10 +6,16 @@ import {Navbar} from "@/components";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "@/firebase";
 import React from "react";
-import {redirect} from "next/navigation";
+import Response from "@/components/Response";
 
 const Page = () => {
     const [authUser] = useAuthState(auth);
+
+    const sendBackHome = () => {
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 1750);
+    }
 
     return (
         <div className="App bg-primary">
@@ -22,25 +28,23 @@ const Page = () => {
             <div
                 className="absolute z-[0] opacity-45 w-[60%] h-[60%] -bottom-[140%] top-0 -left-[10%] rounded-full blue__gradient"/>
 
-            {authUser ?
-                redirect('/')
-                :
-                <div className="flex justify-between px-16">
-                    <SignIn/>
-                    <div className="flex flex-col  justify-center items-center">
-                        <div className="h-[250px] border-gray-800 border-l w-0"></div>
-                        <h1 className="text-white py-4 font-poppins">or</h1>
-                        <div className="h-[250px] border-gray-800 border-l w-0"></div>
-                    </div>
-                    <SignUp/>
+            <div className="flex justify-between px-16">
+                <SignIn/>
+                <div className="flex flex-col  justify-center items-center">
+                    <div className="h-[250px] border-gray-800 border-l w-0"></div>
+                    <h1 className="text-white py-4 font-poppins">or</h1>
+                    <div className="h-[250px] border-gray-800 border-l w-0"></div>
                 </div>
-            }
+                <SignUp/>
+            </div>
 
             <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
                 <div className={`${styles.boxWidth}`}>
                     <Footer/>
                 </div>
             </div>
+            {authUser ? <Response success={true} message={"You are logged in: Redirecting you Home"}
+                                  onLoad={sendBackHome()}/> : <></>}
         </div>
     );
 };

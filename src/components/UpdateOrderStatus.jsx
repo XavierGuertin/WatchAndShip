@@ -10,9 +10,12 @@ const UpdateOrderStatus = () => {
 
     useEffect(() => {
         const fetchOrders = async () => {
+            // Creating a query that selects only orders without the 'not-paid' status
             const q = query(collection(db, "orders"));
             const querySnapshot = await getDocs(q);
-            const ordersData = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+            const ordersData = querySnapshot.docs
+                .map(doc => ({id: doc.id, ...doc.data()}))
+                .filter(order => order.status !== "not-paid" && order.status !== "package-delivered");
             setOrders(ordersData);
         };
 

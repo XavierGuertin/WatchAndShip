@@ -3,7 +3,7 @@ import '../../app/managerPortal/manager.css';
 import { useEffect, useState } from 'react';
 import { db } from "/src/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { FeedbackDisplay } from '..';
+import {FeedbackDisplay, TrackingOrder} from '..';
 
 const OrderList = () => {
 
@@ -69,11 +69,16 @@ const OrderList = () => {
                                     <p className="mt-2 text-gray-500">To: {order.orderData.pointB}</p>
                                     <p className="mt-2 text-gray-500">Distance: {order.orderData.distance} km</p>
 
-                                    {(reviews[index] ? null : (
+                                    {(reviews[index] ?
+                                        <div key={index}>
+                                            <br/>
+                                            <TrackingOrder order={order}/>
+                                        </div>
+                                        : (
                                         <FeedbackDisplay feedback={order.orderData.rating} orderID={order.orderID} />
                                     ))}
 
-                                    <p className="mt-2 text-gray-500 text-justify">{order.orderData.description}</p>
+                                    <p className="mt-2 text-gray-500 text-justify">Description: {order.orderData.description}</p>
                                 </div>
                             </div>
                         </div>

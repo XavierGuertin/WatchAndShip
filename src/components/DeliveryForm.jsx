@@ -14,7 +14,7 @@ const DeliveryForm = () => {
     const todayDate = new Date();
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState(0);
-    const [distance, setDistance] = useState("");
+    const [distance, setDistance] = useState(0);
     const [description, setDescription] = useState("");
 
     const pickupRef = React.useRef("");
@@ -49,9 +49,9 @@ const DeliveryForm = () => {
                 destination: deliveryRef.current.value,
                 travelMode: google.maps.TravelMode.DRIVING,
             });
-
-            setAmount(calculateDeliveryFee(weight, distance, date));
-            setDistance(Math.round(results.routes[0].legs[0].distance.value / 1000));
+            const deliveryDistance = Math.round(results.routes[0].legs[0].distance.value / 1000);
+            setDistance(deliveryDistance);
+            setAmount(calculateDeliveryFee(weight, deliveryDistance, date));
         }
     }
 

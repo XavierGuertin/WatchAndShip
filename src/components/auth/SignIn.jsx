@@ -66,7 +66,7 @@ const SignIn = () => {
                                 <Alert variant="success">
                                     <Alert.Heading>
                                         <strong>Success! </strong>You are logged in successfully.<br/>
-                                        <a href="/"><u>Click here</u></a> to go to the main page<br/>
+                                        You will be redirected to the main page.<br/>
                                     </Alert.Heading>
                                 </Alert> : null}
                             {connectionStatus === "error" ?
