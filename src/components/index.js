@@ -12,7 +12,7 @@ import PaymentForm from "./payment/PaymentForm";
 import DeliveryForm from "./DeliveryForm";
 import TrackingOrder from "./TrackingOrder";
 import UpdateOrderStatus from "./UpdateOrderStatus";
-
+import Ads from "@/components/Ads"
 import dynamic from 'next/dynamic';
 
 // Import FeedbackModal with SSR disabled
@@ -35,5 +35,6 @@ export {
     PaymentForm,
     DeliveryForm,
     TrackingOrder,
-    UpdateOrderStatus
+    UpdateOrderStatus,
+    Ads
 };
