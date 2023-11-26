@@ -1,5 +1,5 @@
 'use client';
-import { PaymentForm, Navbar } from "src/components";
+import {PaymentForm, Navbar, Footer} from "src/components";
 import styles from "src/styles/style";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -31,6 +31,12 @@ function Page({ params }) {
             {/* gradient end */}
             <div className="flex justify-between px-16">
                 <PaymentForm orderId={params.orderId} />
+            </div>
+
+            <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+                <div className={`${styles.boxWidth}`}>
+                    <Footer/>
+                </div>
             </div>
         </div>
     )

@@ -1,19 +1,21 @@
 'use client';
 import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { auth, db } from "src/firebase";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 import Response from '../Response';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import {Ads} from "@/components";
 
 const PaymentForm = props => {
     const [paymentComplete, setPaymentComplete] = useState(false);
     const [cardNumber, setCardNumber] = useState("");
     const [expDate, setExpDate] = useState(null);
     const [cvc, setCvc] = useState("");
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState(null);
+    const [discount, setDiscount] = useState(null);
     const [user] = useAuthState(auth);
     const todayDate = new Date();
 
@@ -24,6 +26,7 @@ const PaymentForm = props => {
             const orderDocRef = doc(db, "orders", props.orderId);
             const docSnap = await getDoc(orderDocRef);
             setPrice(docSnap.get("price"));
+            setDiscount(docSnap.get("discount"));
         }
         getPrice();
     }, [])
@@ -61,9 +64,24 @@ const PaymentForm = props => {
     // Send user back home after 3 seconds
     const sendBackHome = () => {
         document.getElementById("pay-button").disabled = true;
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             router.push('/')
         }, 3000);
+    }
+
+    const [showVideoPopup, setShowVideoPopup] = useState(false);
+    const [videosWatchedCount, setVideosWatchedCount] = useState(1);
+
+    async function updateOrderDiscountAndPrice(count) {
+
+        const newDiscount = count * 0.25;
+        const newPrice = price - newDiscount;
+
+        setDiscount(newDiscount);
+        setPrice(newPrice);
+        console.log(`Discount: ${newDiscount}, Price: ${newPrice}, count: ${count}`)
+        const docRef = doc(db, 'orders', props.orderId);
+        await updateDoc(docRef, {discount: newDiscount, price: newPrice});
     }
 
     return (
@@ -74,9 +92,37 @@ const PaymentForm = props => {
                         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                             <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                                 <h1 className="mb-8 text-3xl text-center">Payment Portal</h1>
-                                <div className="mb-8 flex justify-between">
+
+                                {videosWatchedCount <= 4 && (discount === null || discount === 0) && (
+                                    <button type="button" onClick={(e) => {
+                                        e.preventDefault();
+                                        setShowVideoPopup(true);
+                                    }}>
+                                        <p className="tracking-wide text-sm text-white font-semibold rounded-md p-1 bg-indigo-500">
+                                            Save money - Watch Ads (2min = 2$)
+                                        </p>
+                                    </button>
+                                )}
+                                {showVideoPopup && (
+                                    <Ads onWatchComplete={(count) => {
+                                        console.log(`Watched ${count} videos`);
+                                        setVideosWatchedCount(count);
+
+                                        updateOrderDiscountAndPrice(count)
+                                            .then(() =>
+                                                console.log("Updated discount and price"))
+                                            .catch(err => console.error(err));
+                                        setShowVideoPopup(false) // Hide the popup after completion;
+                                    }}/>
+                                )}
+
+                                <div className="mt-4 mb-2 flex justify-between">
                                     <h1 className="text-2xl text-left">Total</h1>
                                     <h1 className="text-2xl text-right">{price} $</h1>
+                                </div>
+                                <div className="mb-8 flex justify-between">
+                                    <h1 className="text-2xl text-left">Discount</h1>
+                                    <h1 className="text-2xl text-right">{discount === null ? 0 : discount} $</h1>
                                 </div>
                                 <input
                                     className="block border border-grey-light w-full p-3 rounded mb-4"
