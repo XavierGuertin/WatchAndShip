@@ -24,7 +24,12 @@ const Ads = ({ onWatchComplete }) => {
     };
 
     const handleVideoEnd = () => {
-        const watchMore = window.confirm('Do you want to watch another video?');
+        if (videosWatched === 3) {
+            setShowPopup(false);
+            onWatchComplete(videosWatched + 1);
+            return;
+        }
+        const watchMore = window.confirm(`You have watched ${videosWatched + 1} ads. This means that you saved ${0.25 * (videosWatched + 1)}$. Would you like to watch another? If you leave, you will not be able to watch more ads.`);
         if (watchMore) {
             selectRandomVideo();
             setVideosWatched(videosWatched + 1);

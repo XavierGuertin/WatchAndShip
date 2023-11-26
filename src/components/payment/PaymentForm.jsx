@@ -14,7 +14,7 @@ const PaymentForm = props => {
     const [cardNumber, setCardNumber] = useState("");
     const [expDate, setExpDate] = useState(null);
     const [cvc, setCvc] = useState("");
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState(null);
     const [discount, setDiscount] = useState(null);
     const [user] = useAuthState(auth);
     const todayDate = new Date();
@@ -70,6 +70,19 @@ const PaymentForm = props => {
     }
 
     const [showVideoPopup, setShowVideoPopup] = useState(false);
+    const [videosWatchedCount, setVideosWatchedCount] = useState(1);
+
+    async function updateOrderDiscountAndPrice(count) {
+
+        const newDiscount = count * 0.25;
+        const newPrice = price - newDiscount;
+
+        setDiscount(newDiscount);
+        setPrice(newPrice);
+        console.log(`Discount: ${newDiscount}, Price: ${newPrice}, count: ${count}`)
+        const docRef = doc(db, 'orders', props.orderId);
+        await updateDoc(docRef, {discount: newDiscount, price: newPrice});
+    }
 
     return (
         <>
@@ -80,20 +93,27 @@ const PaymentForm = props => {
                             <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                                 <h1 className="mb-8 text-3xl text-center">Payment Portal</h1>
 
-                                <button type="button" onClick={(e) => {
-                                    e.preventDefault();
-                                    setShowVideoPopup(true);
-                                }}>
-                                    <p className="tracking-wide text-sm text-white font-semibold rounded-md p-1 bg-indigo-500">
-                                        Save money - Watch Ads (2min = 2$)
-                                    </p>
-                                </button>
-
+                                {videosWatchedCount <= 4 && (discount === null || discount === 0) && (
+                                    <button type="button" onClick={(e) => {
+                                        e.preventDefault();
+                                        setShowVideoPopup(true);
+                                    }}>
+                                        <p className="tracking-wide text-sm text-white font-semibold rounded-md p-1 bg-indigo-500">
+                                            Save money - Watch Ads (2min = 2$)
+                                        </p>
+                                    </button>
+                                )}
                                 {showVideoPopup && (
                                     <Ads onWatchComplete={(count) => {
                                         console.log(`Watched ${count} videos`);
-                                        setShowVideoPopup(false); // Hide the popup after completion
-                                    }} />
+                                        setVideosWatchedCount(count);
+
+                                        updateOrderDiscountAndPrice(count)
+                                            .then(() =>
+                                                console.log("Updated discount and price"))
+                                            .catch(err => console.error(err));
+                                        setShowVideoPopup(false) // Hide the popup after completion;
+                                    }}/>
                                 )}
 
                                 <div className="mt-4 mb-2 flex justify-between">
