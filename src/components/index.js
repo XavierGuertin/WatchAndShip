@@ -12,6 +12,7 @@ import PaymentForm from "./payment/PaymentForm";
 import DeliveryForm from "./DeliveryForm";
 import TrackingOrder from "./TrackingOrder";
 import UpdateOrderStatus from "./UpdateOrderStatus";
+import CustomerSupport from "./CustomerSupport";
 
 import dynamic from 'next/dynamic';
 
@@ -35,5 +36,6 @@ export {
     PaymentForm,
     DeliveryForm,
     TrackingOrder,
-    UpdateOrderStatus
+    UpdateOrderStatus,
+    CustomerSupport
 };
