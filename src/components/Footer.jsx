@@ -42,6 +42,10 @@ const Footer = () => (
                 Copyright Ⓒ 2023 Watch&Ship. All Rights Reserved.
             </p>
 
+            <a href="/customerSupport" id="contact" className="font-poppins font-normal text-center text-[18px] leading-[27px] text-white">
+                Contact Us
+            </a>
+
             <div className="flex flex-row md:mt-0 mt-6">
                 {socialMedia.map((social, index) => (
                     <img
