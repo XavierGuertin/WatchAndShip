@@ -12,8 +12,7 @@ const Page = () => {
     const [user, loading] = useAuthState(auth);
 
     useEffect(() => {
-        if (!loading && !user || !loading && window.localStorage.getItem('role') !== 'Courier' && window.localStorage.getItem('role') !== null) {
-            console.log('test' + window.localStorage.getItem('role'));
+        if (!loading && !user || !loading && window.localStorage.getItem('userRole') !== 'Courier' && window.localStorage.getItem('userRole') !== null) {
             redirect('/')
         }
     }, [user, loading]);
