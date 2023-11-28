@@ -78,10 +78,6 @@ export const footerLinks = [
                 link: "https://www.somewhere.com/help-center/",
             },
             {
-                name: "Contact Us",
-                link: "https://www.somewhere.com/contact-us/",
-            },
-            {
                 name: "Our Objectives",
                 link: "https://www.somewhere.com/our-objectives/",
             }

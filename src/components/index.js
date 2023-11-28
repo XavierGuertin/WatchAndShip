@@ -14,6 +14,7 @@ import TrackingOrder from "./TrackingOrder";
 import UpdateOrderStatus from "./UpdateOrderStatus";
 import Ads from "@/components/Ads"
 import dynamic from 'next/dynamic';
+import CustomerSupport from "./CustomerSupport";
 
 // Import FeedbackModal with SSR disabled
 const FeedbackModal = dynamic(() => import('./FeedbackModal'), {
@@ -36,5 +37,6 @@ export {
     DeliveryForm,
     TrackingOrder,
     UpdateOrderStatus,
-    Ads
+    Ads,
+    CustomerSupport
 };

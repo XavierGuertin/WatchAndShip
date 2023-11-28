@@ -73,7 +73,8 @@ const SignUp = () => {
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
-                                placeholder="Name"/>
+                                placeholder="Name"
+                                required={true}/>
 
                             <input
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
@@ -81,6 +82,7 @@ const SignUp = () => {
                                 placeholder="Enter your email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                required={true}
                             />
 
                             <input
@@ -89,6 +91,7 @@ const SignUp = () => {
                                 placeholder="Enter your password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                required={true}
                             />
                             <div>
                                 <label>
